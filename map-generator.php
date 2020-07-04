@@ -11,7 +11,9 @@ define( 'MAP_GENERATOR_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 define( 'MAP_GENERATOR_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
-require_once( 'views/index.php' );
+require_once 'core/index.php';
+
+require_once 'views/index.php';
 
 add_action( 'wp_enqueue_scripts', function() {
   wp_register_style( 'map-generator', MAP_GENERATOR_PLUGIN_URL . 'assets/css/style.css', '1.0.0' );

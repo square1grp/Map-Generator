@@ -1,5 +1,9 @@
 @import url("global.css");
 
+#map-generator {
+  font-size: 14px;
+}
+
 #map-generator h1 {
   font-size: 2.5em;
 }
@@ -11,6 +15,8 @@
 #source-map {
   cursor: pointer;
   margin: 12px auto 18px auto;
+  max-width: 1000px;
+  padding: 2px 4px;
 }
 
 #source-map .table-wrapper {
@@ -24,7 +30,8 @@
   border: 2px solid #bebebe;
   border-radius: 4px;
   background-color: #fff;
-  box-shadow: 0 1px 0 #fff, inset 0 2px 10px rgba(0,0,0,.2);
+  box-shadow: 0 1px 0 #fff, inset 0 2px 10px rgba(0, 0, 0, 0.2);
+  padding: 4px;
 }
 
 #source-map .table-wrapper:hover {
@@ -48,4 +55,84 @@
 
 #source-map .table-wrapper:hover em {
   display: block;
+}
+
+#source-map .table-wrapper table {
+  overflow: auto;
+  text-align: left;
+  white-space: nowrap;
+  width: 100%;
+  color: #000;
+  border-collapse: collapse;
+  margin: 0;
+  font-size: 1em;
+}
+
+#source-map .table-wrapper table.example {
+  opacity: 0.3;
+}
+
+#source-map .table-wrapper table th,
+#source-map .table-wrapper table td {
+  font-size: 1em;
+  padding: 4px;
+  padding-top: 4px;
+  padding-right: 4px;
+  padding-bottom: 4px;
+  padding-left: 4px;
+  max-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#source-map .table-wrapper table tr {
+  margin: 0 0 2px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+#source-map .table-wrapper table tr th {
+  font-weight: 700;
+  border-bottom: 1px solid #f63;
+}
+
+#source-map .table-wrapper table tr td {
+  border-right: 1px solid #aaa;
+}
+
+#button-group button {
+  border: 1px solid #b7b7b7;
+  border-radius: 3px;
+  color: #585757;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.2em;
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 20px;
+  padding: 15px 26px;
+  text-decoration: none;
+  zoom: 1;
+  text-transform: none;
+}
+
+#button-group button.set-options {
+  background: #fff;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+}
+
+#button-group button.set-options:hover {
+  background: #ededed;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dcdcdc));
+}
+
+#button-group button.map-now {
+  color: #fff;
+  border: 1px solid #538312;
+  background: #64991e;
+  background: -webkit-gradient(linear, left top, left bottom, from(#7db72f), to(#4e7d0e));
+}
+
+#button-group button.map-now:hover {
+  background: #538018;
+  background: -webkit-gradient(linear, left top, left bottom, from(#6b9d28), to(#436b0c));
 }

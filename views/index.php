@@ -3,6 +3,8 @@ add_shortcode( 'map-generator', 'map_generator_view' );
 
 function map_generator_view() {
   ob_start();
+
+  $sample_data = Spreadsheet::getSampleData();
 ?>
 
   <div id="map-generator" class="map-generator">
@@ -10,8 +12,7 @@ function map_generator_view() {
 
     <div id="source-map" class="source-map">
       <div class="table-wrapper">
-        <table>
-        </table>
+        <?php echo generateSpreadsheetView( $sample_data, 'example' ); ?>
 
         <em>click to copy/paste, or drop your file here</em>
       </div>
@@ -24,8 +25,8 @@ function map_generator_view() {
     </p>
 
     <div id="button-group" class="button-group d-flex">
-      <button class="ml-auto mr-2">Validate & Set Options</button>
-      <button class="mr-auto ml-2">Map Now</button>
+      <button class="ml-auto mr-2 set-options">Set Options</button>
+      <button class="mr-auto ml-2 map-now">Map Now</button>
     </div>
   </div>
 
