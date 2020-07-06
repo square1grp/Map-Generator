@@ -94,29 +94,15 @@
     $(e).on("scroll", function () {
       $(l).css("top", $(this).scrollTop())
     });
-    // $("input,textarea").on("click", function () {
-    //   BatchGeoStore.dispatch({
-    //     type: "GENERATOR_FOCUSED_ELSEWHERE"
-    //   })
-    // });
     $(document).on("paste", function (d) {
       try {
         var e = d.originalEvent.clipboardData.getData("Text");
-        // if (BatchGeoStore.getState().Generator.focusedElsewhere)
-        //   return !0;
-        // BatchGeoStore.dispatch({
-        //   type: "GENERATOR_DATA_CHANGED"
-        // });
         if (a.value != e)
           return a.value = e,
             c(a),
             unValidateSource(),
             !1
       } catch (f) {
-        // BatchGeoStore.dispatch({
-        //   type: "GENERATOR_DATA_RESET"
-        // }),
-        //   console.log("clipboard access failed")
       }
       return !0
     });
