@@ -33,3 +33,17 @@ function generateSpreadsheetView( $sheetData=[], $classname='' ) {
 
   return $html;
 }
+
+function parseSpreadsheetToTxt( $sheetData = [] ) {
+  $lines = [];
+
+  foreach( $sheetData as $rowData ) {
+    if ( strpos( $rowData[0], '#' ) === 0) {
+      continue;
+    }
+
+    $lines[] = implode( "\t", $rowData );
+  }
+
+  return implode( "\n", $lines );
+}

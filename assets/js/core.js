@@ -38,7 +38,9 @@
         }
       }
       return d
-    }
+    },
+
+    msie: /(msie)/gi.test(navigator.userAgent)
   }
 }
 )(window);
