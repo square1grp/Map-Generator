@@ -1,4 +1,14 @@
 (function ($) {
+
+  function loadDragFileLib(a, b) {
+    var d = {
+      XLS: "xls.min.js",
+      XLSX: "xlsx-and-jszip.min.js"
+    }
+      , e = a == "application/vnd.ms-excel" ? "XLS" : "XLSX";
+    b(e)
+  }
+
   function readDragFileTxt(a, b) {
     readDragFile(a, b, "readAsText")
   }
@@ -23,6 +33,23 @@
     var b = MapGenerator.csvToArray(a)
     b.length > 1 && b[0].length > 1 && (a = MapGenerator.arrayToCsv(b, "\t"))
     dragFileReady(a)
+  }
+
+  function dragFileReadyXLS(a) {
+    if (!(typeof a.lib == "undefined" || typeof a.url == "undefined"))
+      try {
+        var b = window[a.lib]
+          , d = a.url.split(";base64,")[1]
+          , e = b.read(d, {
+            type: "base64"
+          })
+          , f = b.utils.sheet_to_csv(e.Sheets[e.SheetNames[0]], {
+            FS: "\t"
+          });
+        dragFileReady(f)
+      } catch (h) {
+        dragFileReset(null, "Unable to convert file data into CSV format: " + h.message)
+      }
   }
 
   function dragFileReady(a) {
@@ -163,7 +190,15 @@
           dragFileReadyCSV(a)
         })
       } else {
-
+        var h = {};
+        loadDragFileLib(file_type, function (a) {
+          h.lib = a;
+          dragFileReadyXLS(h)
+        });
+        readDragFileUrl(file, function (a) {
+          h.url = a;
+          dragFileReadyXLS(h)
+        })
       }
 
     } catch (error) {

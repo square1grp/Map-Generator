@@ -13,6 +13,12 @@ function map_generator_view() {
         <h1 class="text-center">Paste your location data below to map it:</h1>
 
         <div id="sourceWrap" class="sourceWarp">
+          <div id="deleteMe" class="tableize tableize-wrapper">
+            <?php echo generateSpreadsheetView( $sample_data, 'tableize tableize-table' ); ?>
+
+            <em class="tableize tableize-overlay">click to copy/paste, or drop your file here</em>
+          </div>
+
           <textarea id="sourceData" wrap="off" rows="5" cols="80" title="click to copy/paste, or drop your file here" spellcheck="false" autocomplete="off"><?php _e( parseSpreadsheetToTxt( $sample_data ) ) ?></textarea>
         </div>
 

@@ -78,6 +78,10 @@
   opacity: 0.3;
 }
 
+#sourceWrap .tableize-wrapper.tableize-unhover table.tableize {
+  opacity: 1;
+}
+
 #sourceWrap .tableize-wrapper table th,
 #sourceWrap .tableize-wrapper table td {
   font-size: 1em;
