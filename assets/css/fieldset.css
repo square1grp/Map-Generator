@@ -1,0 +1,150 @@
+#sourceWrap {
+  cursor: pointer;
+  margin: 12px auto 18px auto;
+  max-width: 1000px;
+  padding: 2px 4px;
+}
+
+#sourceWrap .tableize-wrapper {
+  position: relative;
+  box-sizing: border-box;
+  height: 140px;
+  overflow: auto;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  padding: 4px;
+  border: 2px solid #bebebe;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 1px 0 #fff, inset 0 2px 10px rgba(0, 0, 0, 0.2);
+  padding: 4px;
+}
+
+#sourceWrap .tableize-wrapper.tableize-drag,
+#sourceWrap .tableize-wrapper:hover {
+  border-color: #090;
+}
+
+#sourceWrap .tableize-wrapper em {
+  opacity: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  text-align: center;
+  align-items: center;
+  line-height: 140px;
+  font-weight: 600;
+  font-size: 1.2em;
+  font-style: normal;
+  position: absolute;
+}
+
+#sourceWrap .tableize-wrapper.tableize-drag em,
+#sourceWrap .tableize-wrapper:hover em {
+  opacity: 1;
+}
+
+#sourceWrap .tableize-wrapper.tableize-unhover em {
+  display: none;
+}
+
+#sourceWrap .tableize-wrapper table {
+  overflow: auto;
+  text-align: left;
+  white-space: nowrap;
+  width: 100%;
+  color: #000;
+  border-collapse: collapse;
+  margin: 0;
+  font-size: 1em;
+}
+
+#sourceWrap .tableize-wrapper table.tableize-table {
+  opacity: 0.3;
+}
+
+#sourceWrap .tableize-wrapper.tableize-unhover table.tableize {
+  opacity: 1;
+}
+
+#sourceWrap .tableize-wrapper table th,
+#sourceWrap .tableize-wrapper table td {
+  font-size: 1em;
+  padding: 4px;
+  padding-top: 4px;
+  padding-right: 4px;
+  padding-bottom: 4px;
+  padding-left: 4px;
+  max-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#sourceWrap .tableize-wrapper table tr {
+  margin: 0 0 2px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+#sourceWrap .tableize-wrapper table tr th {
+  font-weight: 700;
+  border-bottom: 1px solid #f63;
+}
+
+#sourceWrap .tableize-wrapper table tr td {
+  border-right: 1px solid #aaa;
+}
+
+#sourceData {
+  display: none;
+}
+
+.map-generator .fieldset .button-group input[type=submit] {
+  border: 1px solid #b7b7b7;
+  border-radius: 3px;
+  color: #585757;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.2em;
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 20px;
+  padding: 15px 26px;
+  text-decoration: none;
+  zoom: 1;
+  text-transform: none;
+}
+
+.map-generator .fieldset .button-group #validate_button {
+  background: #fff;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.map-generator .fieldset .button-group #validate_button:hover {
+  background: #ededed;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dcdcdc));
+}
+
+.map-generator .fieldset .button-group #mapnow_button {
+  color: #fff;
+  border: 1px solid #538312;
+  background: #64991e;
+  background: -webkit-gradient(linear, left top, left bottom, from(#7db72f), to(#4e7d0e));
+  margin-left: 10px;
+  margin-right: auto;
+}
+
+.map-generator .fieldset .button-group #mapnow_button:hover {
+  background: #538018;
+  background: -webkit-gradient(linear, left top, left bottom, from(#6b9d28), to(#436b0c));
+}
+
+p.drag-drop-error {
+  margin-bottom: 9px;
+  color: #c00;
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+}

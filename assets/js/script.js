@@ -1,215 +1,117 @@
 (function ($) {
+  // generate table from textarea
+  var MapGeneratorTableize = function (sourceEle) {
+    let csvArray = csvToArray(sourceEle.value, String.fromCharCode(9));
+    let $tableWrapper = $("<div />", {
+      "class": "tableize tableize-wrapper"
+    });
+    let $table = $("<table />", {
+      "class": "tableize tableize-table"
+    });
 
-  function loadDragFileLib(a, b) {
-    var d = {
-      XLS: "xls.min.js",
-      XLSX: "xlsx-and-jszip.min.js"
+    if (sourceEle.$tableWrapper)
+      sourceEle.$tableWrapper.remove();
+
+    sourceEle.$tableWrapper = $tableWrapper;
+
+    let commentLineCount = 0;
+    while (csvArray[commentLineCount][0].substring(0, 1) === "#")
+      commentLineCount++;
+
+    // if csvArray length is 1, all are location data
+    if (csvArray.length === 1) {
+      let headerArray = Array(csvArray[0].length - 1).fill("")
+      csvArray.unshift(["Location"].concat(headerArray))
     }
-      , e = a == "application/vnd.ms-excel" ? "XLS" : "XLSX";
-    b(e)
-  }
 
-  function readDragFileTxt(a, b) {
-    readDragFile(a, b, "readAsText")
-  }
-
-  function readDragFileUrl(a, b) {
-    readDragFile(a, b, "readAsDataURL")
-  }
-
-  function readDragFile(a, b, d) {
-    var e = new FileReader
-
-    e.onload = function (a) {
-      b(a.target.result)
-    }
-    e.onerror = function () {
-      dragFileReset(null, "Unable to read file data.")
-    }
-    e[d](a)
-  }
-
-  function dragFileReadyCSV(a) {
-    var b = MapGenerator.csvToArray(a)
-    b.length > 1 && b[0].length > 1 && (a = MapGenerator.arrayToCsv(b, "\t"))
-    dragFileReady(a)
-  }
-
-  function dragFileReadyXLS(a) {
-    if (!(typeof a.lib == "undefined" || typeof a.url == "undefined"))
-      try {
-        var b = window[a.lib]
-          , d = a.url.split(";base64,")[1]
-          , e = b.read(d, {
-            type: "base64"
-          })
-          , f = b.utils.sheet_to_csv(e.Sheets[e.SheetNames[0]], {
-            FS: "\t"
-          });
-        dragFileReady(f)
-      } catch (h) {
-        dragFileReset(null, "Unable to convert file data into CSV format: " + h.message)
-      }
-  }
-
-  function dragFileReady(a) {
-    if (a.length) {
-      var b = $("#sourceData")
-      b.val(a)
-      MapGeneratorTableize(b.get(0))
-      $("div.tableize").addClass("tableize-unhover")
-      $(window).focus(function () {
-        $("div.tableize").mouseover(function () {
-          $(this).removeClass("tableize-unhover")
-          $(this).off("mouseover")
-          $(window).off("focus")
-        })
-      })
-    }
-    dragFileReset()
-  }
-
-  function MapGeneratorTableize(a) {
-    var d = MapGenerator.csvToArray(a.value, String.fromCharCode(9))
-      , e = $("<div />", {
-        "class": "tableize tableize-wrapper"
-      })
-      , f = $("<table />", {
-        "class": "tableize tableize-table"
-      });
-    a.$table && a.$table.remove();
-    a.$table = e;
-    for (var g = 0; d[g][0].substring(0, 1) === "#";)
-      g++;
-    if (d.length === 1) {
-      var h = Array(d[0].length - 1).fill("")
-      d.unshift(["Location"].concat(h))
-    }
-    var k = $("<tr />");
-    d[g].forEach(function (a) {
+    // Add Header
+    let $tr = $("<tr />");
+    csvArray[commentLineCount].forEach(function (a) {
       $("<th />", {
         html: a
-      }).appendTo(k)
+      }).appendTo($tr)
     });
-    f.append(k);
-    d.slice(g + 1, d.length).forEach(function (a) {
-      f.append($("<tr />").append(a.map(function (a) {
+    $table.append($tr)
+
+    // Add content
+    csvArray.slice(commentLineCount + 1, csvArray.length).forEach(function (lineArray) {
+      $table.append($("<tr />").append(lineArray.map(function (a) {
         return $("<td />", {
           html: a.length ? a : " "
         })
       })))
     });
-    e.append(f);
-    e[0].el = a;
-    var l = $("<em />", {
+
+    $tableWrapper.append($table)
+
+    $tableWrapper[0].el = sourceEle;
+
+    // overlay text
+    let overlayTxt = $("<em />", {
       "class": "tableize tableize-overlay",
-      html: a.title || "click to copy/paste"
+      html: sourceEle.title || "click to copy/paste"
     });
-    e.append(l);
-    l[0].tbl = f;
-    $(a).hide().before(e);
+
+    $tableWrapper.append(overlayTxt);
+
+    overlayTxt[0].tbl = $table;
+
+    // add table before text area
+    $(sourceEle).hide().before($tableWrapper);
     $("#deleteMe").remove();
-    MapGenerator.msie && (f.css("filter", ""),
-      l.css("filter", ""));
-    $(e).on("click contextmenu focus", function (c) {
-      a = c.currentTarget.el;
-      a.tbl = null;
-      $(a).show();
-      a.select();
-      $(this).remove()
-    });
-    $(e).on("scroll", function () {
-      $(l).css("top", $(this).scrollTop())
-    });
-    $(document).on("paste", function (d) {
+
+    // events for table wrapper
+    $($tableWrapper)
+      .on("click contextmenu focus", function (e) {
+        _sourceEle = e.currentTarget.el;
+        _sourceEle.tbl = null;
+        $(_sourceEle).show();
+        _sourceEle.select();
+        $(this).remove()
+      })
+      .on("scroll", function () {
+        $(overlayTxt).css("top", $(this).scrollTop())
+      });
+
+    // paste event
+    $(document).on("paste", function (e) {
       try {
-        var e = d.originalEvent.clipboardData.getData("Text");
-        if (a.value != e)
-          return a.value = e,
-            c(a),
+        let sourceData = e.originalEvent.clipboardData.getData("Text");
+        if (sourceEle.value != sourceData)
+          return sourceEle.value = sourceData,
+            c(sourceEle),
             unValidateSource(),
             !1
       } catch (f) {
+        console.log("clipboard access failed")
       }
       return !0
     });
-    a.charCount = a.value.length;
-    typeof document.getElementById("sourceData").addEventListener == "undefined" && ($(a).off("keyup mouseup"),
-      $(a).on("keyup mouseup", function (a) {
-        Math.abs(a.target.charCount - a.target.value.length) > 10 && (MapGeneratorTableize(a.target),
-          unValidateSource());
-        a.target.charCount = a.target.value.length
-      }));
-    $(a).off("blur");
-    $(a).on("blur", function (a) {
-      MapGeneratorTableize(a.target)
-    });
-    $(e).toggleClass("tableize-example", d[0][0] === "Example Address")
-  }
 
-  function dragFileCancelEvent(a) {
-    a.stopPropagation()
-    a.preventDefault()
-  }
-
-  function dragFileStart(a) {
-    dragFileCancelEvent(a)
-
-    $("#sourceWrap div.tableize").addClass("tableize-drag")
-    $("#sourceWrap em.tableize").text("drop your file here")
-  }
-
-  function dragFileReset(a, b) {
-    a && dragFileCancelEvent(a)
-    var d = $("#sourceWrap")
-      , e = d.find("div.tableize")
-      , f = d.find("em.tableize")
-    d.next(".drag-drop-error").remove()
-    if (b) {
-      BatchGeo.timer(b)
-      var h = $('<p class="drag-drop-error">').html("&#9888 Sorry, there was a problem loading your file. Try copy & pasting your location data instead.")
-      d.after(h)
-    }
-    e.removeClass("tableize-drag")
-    e.removeClass("tableize-drop")
-    f.text($("#sourceData").attr("title"))
-  }
-
-  function dragFileLoading(a) {
-    dragFileCancelEvent(a)
-
-    $("#sourceWrap div.tableize").addClass("tableize-drop");
-    $("#sourceWrap em.tableize").html("&hellip;loading&hellip;");
-
-    try {
-      var file = a.originalEvent.dataTransfer.files[0], file_type = file.type
-      file_type ? file_type == "text/tab-separated-values" || /\.(csv|tsv|tab)$/i.test(file.name) && (file_type = "text/csv") : /\.xls$/i.test(file.name) && (file_type = "application/vnd.ms-excel")
-
-      if (file_type == "text/csv") {
-        readDragFileTxt(file, function (a) {
-          dragFileReadyCSV(a)
+    sourceEle.charCount = sourceEle.value.length;
+    if (typeof $(sourceEle).addEventListener == "undefined") {
+      $(sourceEle)
+        .off("keyup mouseup")
+        .on("keyup mouseup", function (e) {
+          if (Math.abs(e.target.charCount - e.target.value.length) > 10) {
+            MapGeneratorTableize(e.target);
+            unValidateSource();
+          }
+          e.target.charCount = e.target.value.length
         })
-      } else {
-        var h = {};
-        loadDragFileLib(file_type, function (a) {
-          h.lib = a;
-          dragFileReadyXLS(h)
-        });
-        readDragFileUrl(file, function (a) {
-          h.url = a;
-          dragFileReadyXLS(h)
+        .off("blur")
+        .on("blur", function (e) {
+          MapGeneratorTableize(e.target)
         })
-      }
-
-    } catch (error) {
-
+        .toggleClass("tableize-example", csvArray[0][0] === "Example Address")
     }
-  }
+  };
 
-  $("#sourceWrap")
-    .on('dragover', dragFileStart)
-    .on('dragleave', dragFileReset)
-    .on('drop dragdrop', dragFileLoading)
+  var unValidateSource = function () {
 
-  MapGeneratorTableize(document.getElementById("sourceData"))
+  };
+
+  // source Ele (textarea)
+  var sourceEle = document.getElementById("sourceData");
+  MapGeneratorTableize(sourceEle);
 })(jQuery)

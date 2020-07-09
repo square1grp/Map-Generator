@@ -28,13 +28,21 @@ function map_generator_view() {
           Spreadsheet Template (Excel)</a>, or hit "Map Now" and try it out with our example data. )
         </p>
 
-        <div id="button-group" class="button-group d-flex">
+        <div class="button-group d-flex">
           <input type="submit" id="validate_button" value="Validate & Set Options" class="ml-auto mr-2 validate_button">
           <input type="submit" id="mapnow_button" value="Map Now" class="mr-auto ml-2 mapnow_button">
         </div>
+
+        <span id="validate_status" class="status">
+          Done: <span id="num_of_columns">9</span> columns, <span id="num_of_rows">11</span> rows - scroll down to Validate &amp; Set Options
+        </span>
       </div>
     </form>
   </div>
+
+  <script>
+    var MEMBERSHIP = 'lite'; //free, pro
+  </script>
 
 <?php
   wp_enqueue_style( 'map-generator' );
