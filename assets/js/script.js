@@ -1,4 +1,48 @@
 (function ($) {
+  // column names
+  var columnNames = [];
+  var sampleRow = [];
+  var $selectEleList = [{
+    selector: "#address_sel",
+    default: "Address"
+  }, {
+    selector: "#city_sel",
+    default: "City"
+  }, {
+    selector: "#state_sel",
+    default: "State"
+  }, {
+    selector: "#zip_sel",
+    default: "Zipcode"
+  }, {
+    selector: "#group_sel",
+    default: "Group"
+  }, {
+    selector: "#title_sel",
+    default: "Name"
+  }, {
+    selector: "#desc_sel",
+    default: "Description"
+  }, {
+    selector: "#countryfield_sel",
+    default: "Country"
+  }, {
+    selector: "#descURL_sel",
+    default: "URL"
+  }, {
+    selector: "#descIMG_sel",
+    default: "Image URL"
+  }, {
+    selector: "#email_sel",
+    default: "Email"
+  }, {
+    selector: "#lat_sel",
+    default: "Latitude"
+  }, {
+    selector: "#long_sel",
+    default: "Longitude"
+  }];
+
   // generate table from textarea
   var MapGeneratorTableize = function (sourceEle) {
     let csvArray = csvToArray(sourceEle.value, String.fromCharCode(9));
@@ -24,9 +68,13 @@
       csvArray.unshift(["Location"].concat(headerArray))
     }
 
+    // populate column names and sample row
+    columnNames = csvArray[commentLineCount];
+    sampleRow = csvArray[commentLineCount + 1];
+
     // Add Header
     let $tr = $("<tr />");
-    csvArray[commentLineCount].forEach(function (a) {
+    columnNames.forEach(function (a) {
       $("<th />", {
         html: a
       }).appendTo($tr)
@@ -108,8 +156,27 @@
   };
 
   // init source data
-  var unValidateSource = function () { };
+  var unValidateSource = function () {
+    $("#validate_status, #fields, #advancedOptions").slideUp();
 
+    $.each($selectEleList, function (sel_idx, $selectedEle) {
+      $($selectedEle.selector).find("option:not(:first-child)").remove()
+    });
+  };
+
+  // validate source data
+  var validateSource = function () {
+    $.each($selectEleList, function (sel_idx, $selectedEle) {
+      $.each(columnNames, function (col_idx, columnName) {
+        let selected = "";
+
+        if (columnName == $selectedEle.default)
+          selected = "selected";
+
+        $($selectedEle.selector).append(`<option value="${columnName}" ${selected}>${columnName}</option>`);
+      });
+    });
+  };
 
   var dragFileCancelEvent = function (e) {
     e.stopPropagation();
@@ -133,7 +200,7 @@
 
     $sourceWrap.next(".drag-drop-error").remove();
     if (is_error) {
-      var $error = $('<p class="drag-drop-error">').html("&#9888; Sorry, there was a problem loading your file. Try copy & pasting your location data instead.");
+      var $error = $("<p class=\"drag-drop-error\">").html("&#9888; Sorry, there was a problem loading your file. Try copy & pasting your location data instead.");
       $sourceWrap.after($error)
     }
     $tableWrapper.removeClass("tableize-drag");
@@ -269,4 +336,17 @@
   var sourceEle = document.getElementById("sourceData");
   MapGeneratorTableize(sourceEle);
   initSourceDragDrop();
+
+  $("#validate_button").on("click", function () {
+    $("#validate_status").css({ display: "block" });
+    $("#fields").slideDown()
+    validateSource();
+  });
+
+  $("#advanced_button").on("click", function () {
+    $("#advancedOptions").slideDown();
+  });
+
+  $("#validate_button").trigger("click");
+  $("#advanced_button").trigger("click");
 })(jQuery)

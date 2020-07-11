@@ -99,7 +99,7 @@
   display: none;
 }
 
-.map-generator .fieldset .button-group input[type=submit] {
+.map-generator .fieldset .button-group input[type="submit"] {
   border: 1px solid #b7b7b7;
   border-radius: 3px;
   color: #585757;
@@ -146,5 +146,14 @@ p.drag-drop-error {
   color: #c00;
   font-weight: 700;
   font-size: 13px;
+  text-align: center;
+}
+
+#validate_status {
+  color: #090;
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: 14px;
+  display: none;
   text-align: center;
 }

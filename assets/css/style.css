@@ -1,15 +1,22 @@
 @import url("global.css");
 @import url("fieldset.css");
+@import url("fields.css");
 
 #map-generator {
   font-size: 14px;
+  color: #585757;
 }
 
 #map-generator h1 {
   font-size: 2.5em;
+  margin: 4rem auto 2rem;
+}
+
+#map-generator h2 {
+  font-size: 2em;
+  margin: 2rem auto 1rem;
 }
 
 #map-generator p {
-  font-size: 0.8em;
+  font-size: 1em;
 }
-

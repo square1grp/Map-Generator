@@ -1,0 +1,230 @@
+.map-generator #fields,
+.map-generator #advancedOptions {
+  display: none;
+}
+
+.map-generator #fields .map-options {
+  max-width: 820px;
+  margin: 0 auto;
+  font-size: 12px;
+  text-align: left;
+}
+
+.map-generator #fields .map-options h3 {
+  color: #bbb;
+  font-size: 0.9em;
+  font-weight: 700;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 4px;
+  margin-top: 10px;
+}
+
+.map-generator #fields .map-options-row {
+  margin-right: -20px;
+  margin-bottom: 24px;
+}
+
+.map-generator #fields .map-options-col {
+  margin-right: 20px;
+  float: left;
+}
+
+.map-generator #fields .map-options-2-col .map-options-col,
+.map-generator #fields .map-options-col {
+  width: 400px;
+}
+
+.map-generator #fields .option-field {
+  margin-bottom: 5px;
+}
+
+.map-generator #fields .option-field label {
+  display: block;
+  float: left;
+  width: 47.5%;
+  text-align: right;
+  padding-top: 4px;
+  font-size: 1em;
+}
+
+.map-generator #fields .option-field select {
+  float: right;
+  width: 50%;
+  height: 25px;
+  box-sizing: border-box;
+  font-size: 1.3em;
+}
+
+.map-generator #fields .color-picker:after,
+.map-generator #fields .color-picker:before,
+.map-generator #fields .map-options-col:after,
+.map-generator #fields .map-options-col:before,
+.map-generator #fields .map-options-row:after,
+.map-generator #fields .map-options-row:before,
+.map-generator #fields .option-field:after,
+.map-generator #fields .option-field:before,
+.map-generator #fields .option-images:after,
+.map-generator #fields .option-images:before {
+  content: " ";
+  display: table;
+}
+
+.map-generator #fields .color-picker:after,
+.map-generator #fields .map-options-col:after,
+.map-generator #fields .map-options-row:after,
+.map-generator #fields .option-field:after,
+.map-generator #fields .option-images:after {
+  clear: both;
+}
+
+.map-generator #fields #preview {
+  background-color: #fff;
+  border: 1px dashed #aaa;
+  margin: 0 0 12px 0;
+  padding: 8px;
+  width: auto;
+  border-radius: 6px;
+  max-width: 250px;
+}
+
+.map-generator #fields .map-options-adv-btn {
+  text-align: center;
+}
+
+.map-generator #fields .map-options-adv-btn button {
+  border-radius: 3px;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: none;
+  font-size: 11px;
+  padding: 0.5em;
+  color: #606060;
+  border: 1px solid #b7b7b7;
+  background: #ededed;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+  margin: 12px auto 0 auto;
+  text-transform: initial;
+}
+
+.map-generator #fields .map-options-adv-btn button:hover {
+  background: #ededed;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dcdcdc));
+}
+
+.map-generator #fields .map-options-col label.option-toggle {
+  display: block;
+  margin: 0 0 5px 0;
+  padding: 2px 0 0 2px;
+  line-height: 18px;
+  font-size: 1em;
+}
+
+.map-generator #fields .map-options-3-col .map-options-col {
+  width: 260px;
+}
+
+.map-generator #fields .map-options-col.marker-colors table {
+  margin: 0;
+}
+
+.map-generator #fields .map-options-col.marker-colors th {
+  font-weight: 700;
+  text-align: left;
+  font-size: 12px;
+  height: 20px;
+  padding: 3px;
+}
+
+.map-generator #fields .map-options-col.marker-colors .color {
+  width: 10%;
+  padding: 3px;
+  border-left: 0;
+}
+
+.map-generator #fields .map-options-col #preview {
+  background-color: #fff;
+  border: 1px dashed #aaa;
+  padding: 8px;
+  border-radius: 6px;
+  max-width: 250px;
+  margin: 0 0 12px 0;
+  width: auto;
+}
+
+.map-generator #fields .map-options-col #markerBoxPreview {
+  overflow: hidden;
+}
+
+.map-generator #fields .map-options-col .markerLabel {
+  border-width: 0;
+  padding: 0.5em 0.4em 0.8em 1em;
+  line-height: 1.4em;
+  border-spacing: 0;
+  margin: 0;
+  min-width: 200px;
+  max-width: 350px;
+}
+
+.map-generator #fields .map-options-col .markerLabel {
+  overflow-wrap: break-word;
+}
+
+.map-generator #fields .map-options-col .markerLabel .markerContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.map-generator #fields .map-options-col .markerLabel .markerContent .cardTitle {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  height: auto;
+  line-height: 17px;
+  white-space: normal;
+  padding-right: 25px;
+  margin-top: 2px;
+}
+
+.map-generator #fields .map-options-col .markerLabel .markerContent .cardTitle a {
+  color: #36c;
+}
+
+.map-generator #fields .map-options-col .markerLabel .markerContent .cardTitle a.marker:hover,
+.map-generator #fields .map-options-col .markerLabel .markerContent .cardTitle a.marker:link,
+.map-generator #fields .map-options-col .markerLabel .markerContent .cardTitle a.marker:visited {
+  border-bottom: 0;
+  margin: 0 0 2px 0;
+  text-decoration: none;
+  color: #36c;
+}
+
+.map-generator #fields .map-options-col .markerLabel .markerContent .cardTitle a.marker:link,
+.map-generator #fields .map-options-col .markerLabel .markerContent .cardTitle a.marker:visited {
+  display: block;
+  margin: 2px 0;
+  padding: 0;
+}
+
+.map-generator #fields .map-options-col .markerLabel .markerContent .markerImage img.descIMG {
+  max-width: 198px;
+  border: 0;
+  margin: 10px;
+  width: 100%;
+}
+
+.map-generator #fields .map-options-col .markerLabel .markerContent .markerDetails .address {
+  font-style: normal;
+  color: #000;
+}
+
+.map-generator #fields .map-options-col .markerLabel .markerContent .markerDetails a {
+  color: #36c;
+}
+
+.map-generator #fields .map-options-col .markerLabel .markerContent .l {
+  color: #545453;
+  font-weight: 700;
+}
