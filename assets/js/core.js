@@ -46,9 +46,47 @@ var arrayToCsv = function (a, b) {
   return d
 };
 
+// get column idx
+var getColumnIndex = function (columnNames, columnName) {
+  for (let colIdx = 0; colIdx < columnNames.length; colIdx++) {
+    if (columnName == columnNames[colIdx])
+      return colIdx;
+  }
+
+  return -1;
+};
+
+// get sample row field
+var getSampleRowField = function (sampleRow, columnNames, columnName) {
+  let colIdx = getColumnIndex(columnNames, columnName);
+
+  if (colIdx !== -1) {
+    return sampleRow[colIdx];
+  }
+
+  return '';
+};
 
 /**
  * Generate MarkerBoxPreview Content
+ * @param markerBoxPreviewArgs = {
+    address: '',
+    city: '',
+    state: '',
+    zip: '',
+    group: '',
+    title: '',
+    description: '',
+    country: '',
+    url: 'javascript:void(0)',
+    imageURL: '',
+    email: '',
+    phonenumber: '',
+    latitude: '',
+    longitude: '',
+    columnNames: [],
+    sampleRow: [{}, {}, ...]
+  }
  */
 var generateMarkerBoxPreviewContent = function (markerBoxPreviewArgs, options = {}) {
   $html = ``;
@@ -56,7 +94,141 @@ var generateMarkerBoxPreviewContent = function (markerBoxPreviewArgs, options = 
   console.log(markerBoxPreviewArgs);
 
   if (markerBoxPreviewArgs.title?.length)
-    $html += TEMPLATE_TITLE.replace('$$$MARKER_TITLE$$$', markerBoxPreviewArgs.title).replace('$$$MARKER_URL$$$', markerBoxPreviewArgs.url)
+    $html += TEMPLATE_TITLE
+      .replace(/MARKER_TITLE/g,
+        getSampleRowField(
+          markerBoxPreviewArgs.sampleRow,
+          markerBoxPreviewArgs.columnNames,
+          markerBoxPreviewArgs.title
+        )
+      )
+      .replace(/MARKER_URL/g,
+        getSampleRowField(
+          markerBoxPreviewArgs.sampleRow,
+          markerBoxPreviewArgs.columnNames,
+          markerBoxPreviewArgs.url
+        )
+      )
+
+  $html += `
+    <div class="markerSub">
+      <div class="markerDetails">`;
+
+  if (
+    markerBoxPreviewArgs.address.length ||
+    markerBoxPreviewArgs.city.length ||
+    markerBoxPreviewArgs.zip.length ||
+    markerBoxPreviewArgs.state.length ||
+    markerBoxPreviewArgs.country.length
+  ) {
+    $html += TEMPLATE_LOCATION
+      .replace(/MARKER_ADDRESS/g,
+        getSampleRowField(
+          markerBoxPreviewArgs.sampleRow,
+          markerBoxPreviewArgs.columnNames,
+          markerBoxPreviewArgs.address
+        )
+      )
+      .replace(/MARKER_CITY/g,
+        getSampleRowField(
+          markerBoxPreviewArgs.sampleRow,
+          markerBoxPreviewArgs.columnNames,
+          markerBoxPreviewArgs.city
+        )
+      )
+      .replace(/MARKER_STATE/g,
+        getSampleRowField(
+          markerBoxPreviewArgs.sampleRow,
+          markerBoxPreviewArgs.columnNames,
+          markerBoxPreviewArgs.state
+        )
+      )
+      .replace(/MARKER_ZIP/g,
+        getSampleRowField(
+          markerBoxPreviewArgs.sampleRow,
+          markerBoxPreviewArgs.columnNames,
+          markerBoxPreviewArgs.zip
+        )
+      )
+      .replace(/MARKER_COUNTRY/g,
+        getSampleRowField(
+          markerBoxPreviewArgs.sampleRow,
+          markerBoxPreviewArgs.columnNames,
+          markerBoxPreviewArgs.country
+        )
+      )
+  }
+
+  if (markerBoxPreviewArgs.email.length)
+    $html += TEMPLATE_EMAIL.replace(/MARKER_EMAIL/g,
+      getSampleRowField(
+        markerBoxPreviewArgs.sampleRow,
+        markerBoxPreviewArgs.columnNames,
+        markerBoxPreviewArgs.email
+      )
+    )
+
+  if (markerBoxPreviewArgs.phonenumber.length)
+    $html += TEMPLATE_PHONENUMBER.replace(/MARKER_PHONENUMBER/g,
+      getSampleRowField(
+        markerBoxPreviewArgs.sampleRow,
+        markerBoxPreviewArgs.columnNames,
+        markerBoxPreviewArgs.phonenumber
+      )
+    )
+
+  if (markerBoxPreviewArgs.description.length) {
+    if (markerBoxPreviewArgs.description == 'All Columns') {
+      for (let colIdx = 0; colIdx < markerBoxPreviewArgs.columnNames.length; colIdx++) {
+        let columnName = markerBoxPreviewArgs.columnNames[colIdx];
+
+        switch (columnName) {
+          case markerBoxPreviewArgs.address:
+          case markerBoxPreviewArgs.city:
+          case markerBoxPreviewArgs.state:
+          case markerBoxPreviewArgs.zip:
+          // case markerBoxPreviewArgs.group:
+          case markerBoxPreviewArgs.title:
+          case markerBoxPreviewArgs.description:
+          case markerBoxPreviewArgs.country:
+          case markerBoxPreviewArgs.url:
+          case markerBoxPreviewArgs.imageURL:
+          case markerBoxPreviewArgs.email:
+          case markerBoxPreviewArgs.phonenumber:
+            columnName = '';
+            break;
+        }
+
+        if (columnName.length) {
+          $html += TEMPLATE_DESCRIPTION
+            .replace(/MARKER_DESCRIPTION_NAME/g, columnName)
+            .replace(
+              /MARKER_DESCRIPTION_VALUE/g,
+              getSampleRowField(
+                markerBoxPreviewArgs.sampleRow,
+                markerBoxPreviewArgs.columnNames,
+                columnName
+              )
+            )
+        }
+      }
+    } else {
+      $html += TEMPLATE_DESCRIPTION
+        .replace(/MARKER_DESCRIPTION_NAME/g, markerBoxPreviewArgs.description)
+        .replace(
+          /MARKER_DESCRIPTION_VALUE/g,
+          getSampleRowField(
+            markerBoxPreviewArgs.sampleRow,
+            markerBoxPreviewArgs.columnNames,
+            markerBoxPreviewArgs.description
+          )
+        )
+    }
+  }
+
+  $html += `
+      </div>
+    </div>`;
 
   return $html;
 };

@@ -88,67 +88,14 @@ function map_generator_view() {
 			
 						<div class="map-options-row">
 							<div class="map-options-col">
-
-								<div class="option-field">
-									<label for="title_sel">Title</label>
-									<select id="title_sel">
-										<option>&nbsp;</option>
-									</select>
-								</div>
-			
-								<div class="option-field">
-									<label for="desc_sel">Marker Description</label>
-									<select id="desc_sel">
-										<option>All Columns</option>
-									</select>
-								</div>
-			
-								<div class="option-field">
-									<label for="country_sel">Country Field</label>
-									<select id="country_sel">
-										<option>&nbsp;</option>
-									</select>
-								</div>
-			
-								<div class="option-field">
-									<label for="descURL_sel">URL</label>
-									<select id="descURL_sel">
-										<option>Use Google Maps</option>
-									</select>
-								</div>
-			
-								<div class="option-field">
-									<label for="descIMG_sel">Image URL</label>
-									<select id="descIMG_sel">
-										<option>&nbsp;</option>
-									</select>
-								</div>
-			
-								<div class="option-field">
-									<label for="email_sel">E-mail</label>
-									<select id="email_sel">
-										<option value="-1">&nbsp;</option>
-									</select>
-								</div>
-			
-								<div class="option-field">
-									<label for="lat_sel">Latitude</label>
-									<select id="lat_sel">
-										<option value="-1">none</option>
-									</select>
-								</div>
-			
-								<div class="option-field">
-									<label for="lon_sel">Longitude</label>
-									<select id="lon_sel">
-										<option value="-1">none</option>
-									</select>
-								</div>
-			
-								<div class="option-field hide">
-									<select id="postal_sel"><option></option></select>
-									<select id="accuracy_sel"><option></option></select>
-								</div>
+								<?php foreach( getAdvancedFields() as $field ): ?>
+									<div class="option-field">
+										<label id="<?php _e( $field['type'] ) ?>_label" for="<?php _e( $field['type'] ) ?>_sel"><?php _e( $field['label'] ) ?></label>
+										<select id="<?php _e( $field['type'] ) ?>_sel">
+											<option value="<?php _e( $field['default']['value'] ) ?>"><?php _e( $field['default']['label'] ) ?></option>
+										</select>
+									</div>
+								<?php endforeach; ?>
 							</div>
 			
 							<div class="map-options-col">
@@ -182,7 +129,7 @@ function map_generator_view() {
 									<select id="clustering_icon_mode_sel" style="width:85px;">
 										<option>sum</option>
 										<option>average</option>
-									</select> of <select id="clustering_icon_sel" style="width:85px;"></select>
+									</select> of <select id="clustering_icon_sel" style="width:85px;"><option value="">&nbsp;</option></select>
 								</label>
 			
 								<label class="option-toggle" for="dist_cb">
@@ -296,26 +243,30 @@ function map_generator_view() {
 	<script>
 		var MEMBERSHIP = 'lite'; //free, pro
 
-		var TEMPLATE_TITLE = `
+    var TEMPLATE_TITLE = `
 			<h1 class="cardTitle">
-        <a href="$$$MARKER_URL$$$" target="_blank" class="marker " rel="nofollow">$$$MARKER_TITLE$$$</a>
+        <a href="MARKER_URL" target="_blank" class="marker " rel="nofollow">MARKER_TITLE</a>
       </h1>
 		`;
 
 		var TEMPLATE_LOCATION = `
 			<div class="address">
-				<a href="https://www.google.com/maps/search/?api=1&amp;query=$$$MARKER_ADDRESS$$$ $$$MARKER_CITY$$$, $$$MARKER_STATE$$$ $$$MAKER_ZIP$$$ $$$MARKER_COUNTRY$$$"
+				<a href="https://www.google.com/maps/search/?api=1&amp;query=MARKER_ADDRESS MARKER_CITY, MARKER_STATE MARKER_ZIP MARKER_COUNTRY"
 					target="_blank" class="directions-link" title="Open in Google Maps" rel="nofollow" id="markerAddress">
-					$$$MARKER_ADDRESS$$$<br>$$$MARKER_CITY$$$, $$$MARKER_STATE$$$ $$$MARKER_ZIP$$$ $$$MARKER_COUNTRY$$$</a>
+					MARKER_ADDRESS<br>MARKER_CITY, MARKER_STATE MARKER_ZIP MARKER_COUNTRY</a>
 			</div>
 		`;
 
 		var TEMPLATE_PHONENUMBER = `
-			<div><span class="l">Phone Number:</span>&nbsp;<a href="tel:$$$MAKER_PHONENUMBER$$$">$$$MAKER_PHONENUMBER$$$</a></div>
+			<div><span class="l">Phone Number:</span>&nbsp;<a href="tel:MARKER_PHONENUMBER">MARKER_PHONENUMBER</a></div>
 		`;
 
 		var TEMPLATE_EMAIL = `
-			<div><span class="l">Email:</span>&nbsp;<a href="mailto:$$$MARKER_EMAIL$$$">$$$MARKER_EMAIL$$$</a></div>
+			<div><span class="l">Email:</span>&nbsp;<a href="mailto:MARKER_EMAIL">MARKER_EMAIL</a></div>
+		`;
+
+		var TEMPLATE_DESCRIPTION = `
+			<div><span class="l">MARKER_DESCRIPTION_NAME:</span>&nbsp;MARKER_DESCRIPTION_VALUE</div>
 		`;
 	</script>
 

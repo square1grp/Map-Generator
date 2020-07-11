@@ -22,7 +22,7 @@
     default: "Name"
   }, {
     selector: "#desc_sel",
-    default: "Description"
+    default: ""
   }, {
     selector: "#country_sel",
     default: "Country"
@@ -35,6 +35,9 @@
   }, {
     selector: "#email_sel",
     default: "Email"
+  }, {
+    selector: "#phonenumber_sel",
+    default: "Phone Number"
   }, {
     selector: "#lat_sel",
     default: "Latitude"
@@ -54,6 +57,7 @@
     url: 'javascript:void(0)',
     imageURL: '',
     email: '',
+    phonenumber: '',
     latitude: '',
     longitude: ''
   };
@@ -170,33 +174,12 @@
     }
   };
 
-  // get column idx
-  var getColumnIndex = function (columnName) {
-    for (let colIdx = 0; colIdx < columnNames.length; colIdx++) {
-      if (columnName == columnNames[colIdx])
-        return colIdx;
-    }
-
-    return -1;
-  };
-
-  // get sample row field
-  var getSampleRowField = function (columnName) {
-    let colIdx = getColumnIndex(columnName);
-
-    if (colIdx !== -1) {
-      return sampleRow[colIdx];
-    }
-
-    return null;
-  };
-
   // init source data
   var unValidateSource = function () {
     $("#validate_status, #fields, #advancedOptions").slideUp();
 
-    $.each($selectEleList, function (sel_idx, $selectedEle) {
-      $($selectedEle.selector).find("option:not(:first-child)").remove()
+    $.each([{ selector: "#clustering_icon_sel", default: null }].concat($selectEleList), function (sel_idx, $selectEle) {
+      $($selectEle.selector).find("option:not(:first-child)").remove()
     });
 
     $(".map-generator #fields .map-options-col .markerLabel .markerContent > *").remove();
@@ -206,19 +189,22 @@
   var updateMarkerBoxPreview = function () {
     let markerBoxPreviewArgs = {
       ...markerBoxPreviewDefaultArgs,
-      address: getSampleRowField($("#address_sel").val()),
-      city: getSampleRowField($("#city_sel").val()),
-      state: getSampleRowField($("#state_sel").val()),
-      zip: getSampleRowField($("#zip_sel").val()),
-      country: getSampleRowField($("#country_sel").val()),
-      group: getSampleRowField($("#group_sel").val()),
-      title: getSampleRowField($("#title_sel").val()),
-      description: getSampleRowField($("#desc_sel").val()),
-      url: getSampleRowField($("#descURL_sel").val()),
-      imageURL: getSampleRowField($("#descIMG_sel").val()),
-      email: getSampleRowField($("#email_sel").val()),
-      latitude: getSampleRowField($("#lat_sel").val()),
-      longitude: getSampleRowField($("#lon_sel").val())
+      address: $("#address_sel").val(),
+      city: $("#city_sel").val(),
+      state: $("#state_sel").val(),
+      zip: $("#zip_sel").val(),
+      country: $("#country_sel").val(),
+      // group: $("#group_sel").val(),
+      title: $("#title_sel").val(),
+      description: $("#desc_sel").val(),
+      url: $("#descURL_sel").val(),
+      imageURL: $("#descIMG_sel").val(),
+      email: $("#email_sel").val(),
+      phonenumber: $("#phonenumber_sel").val(),
+      latitude: $("#lat_sel").val(),
+      longitude: $("#lon_sel").val(),
+      columnNames: columnNames,
+      sampleRow: sampleRow
     };
 
     let $html = generateMarkerBoxPreviewContent(markerBoxPreviewArgs);
@@ -228,14 +214,14 @@
 
   // validate source data
   var validateSource = function () {
-    $.each($selectEleList, function (sel_idx, $selectedEle) {
+    $.each([{ selector: "#clustering_icon_sel", default: null }].concat($selectEleList), function (sel_idx, $selectEle) {
       $.each(columnNames, function (col_idx, columnName) {
         let selected = "";
 
-        if (columnName == $selectedEle.default)
+        if (columnName == $selectEle.default)
           selected = "selected";
 
-        $($selectedEle.selector).append(`<option value="${columnName}" ${selected}>${columnName}</option>`);
+        $($selectEle.selector).append(`<option value="${columnName}" ${selected}>${columnName}</option>`);
       });
     });
 
@@ -403,14 +389,22 @@
 
   $("#validate_button").on("click", function () {
     $("#validate_status").css({ display: "block" });
-    $("#fields").slideDown()
+    $("#fields").slideDown();
+
+    $("#advanced_button").show().on("click", function () {
+      $("#advancedOptions").slideDown();
+      $("#advanced_button").off('click').hide();
+    });
     validateSource();
   });
 
-  $("#advanced_button").on("click", function () {
-    $("#advancedOptions").slideDown();
+  $.each($selectEleList, function (selIdx, $selectEle) {
+    $($selectEle.selector).on('change', function () {
+      updateMarkerBoxPreview()
+    });
   });
 
-  $("#validate_button").trigger("click");
-  $("#advanced_button").trigger("click");
+  $("#clustering_cb").change(function () {
+    $("#clusteroptions").toggle();
+  });
 })(jQuery)

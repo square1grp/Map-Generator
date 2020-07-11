@@ -106,7 +106,7 @@ function getFields() {
       'label' => 'Location / Address',
       'type'  => 'address',
       'default' => [
-        'value' => '-1',
+        'value' => '',
         'label' => 'none'
       ]
     ],
@@ -114,7 +114,7 @@ function getFields() {
       'label' => 'City / County',
       'type'  => 'city',
       'default' => [
-        'value' => '-1',
+        'value' => '',
         'label' => 'none'
       ]
     ],
@@ -122,7 +122,7 @@ function getFields() {
       'label' => 'State / Province / Postcode',
       'type'  => 'state',
       'default' => [
-        'value' => '-1',
+        'value' => '',
         'label' => 'none'
       ]
     ],
@@ -130,7 +130,7 @@ function getFields() {
       'label' => 'Zip / Postcode / Country',
       'type'  => 'zip',
       'default' => [
-        'value' => '-1',
+        'value' => '',
         'label' => 'none'
       ]
     ],
@@ -142,5 +142,74 @@ function getFields() {
         'label' => 'Single Color'
       ]
     ],
+  ];
+}
+
+function getAdvancedFields() {
+  return [
+    [
+      'label' => 'Title',
+      'type'  => 'title',
+      'default' => [
+        'value' => '',
+        'label' => '&nbsp;'
+      ]
+    ], [
+      'label' => 'Marker Description',
+      'type'  => 'desc',
+      'default' => [
+        'value' => 'All Columns',
+        'label' => 'All Columns'
+      ]
+    ], [
+      'label' => 'Country Field',
+      'type'  => 'country',
+      'default' => [
+        'value' => '',
+        'label' => '&nbsp;'
+      ]
+    ], [
+      'label' => 'URL',
+      'type'  => 'descURL',
+      'default' => [
+        'value' => '',
+        'label' => 'Use Google Maps'
+      ]
+    ], [
+      'label' => 'Image URL',
+      'type'  => 'descIMG',
+      'default' => [
+        'value' => '',
+        'label' => '&nbsp;'
+      ]
+    ], [
+      'label' => 'E-mail',
+      'type'  => 'email',
+      'default' => [
+        'value' => '',
+        'label' => '&nbsp;'
+      ]
+    ], [
+      'label' => 'Phone Number',
+      'type'  => 'phonenumber',
+      'default' => [
+        'value' => '',
+        'label' => '&nbsp;'
+      ]
+    ], [
+      'label' => 'Latitude',
+      'type'  => 'lat',
+      'default' => [
+        'value' => '',
+        'label' => 'none'
+      ]
+    ], [
+      'label' => 'Longitude',
+      'type'  => 'lon',
+      'default' => [
+        'value' => '',
+        'label' => 'none'
+      ]
+    ]
   ];
 }
