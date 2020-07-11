@@ -196,39 +196,20 @@ function map_generator_view() {
 								<h3>Marker shape</h3>
 			
 								<div class="option-images">
-									<div class="option-upload hide">
-			
-										<div class="option-upload-step option-upload-step-1">
-											<p class="bttn">
-												<input type="hidden" name="MAX_FILE_SIZE" value="10240">
-												<label class="button white buttonsmall file-input-wrapper">
-													Upload a custom marker
-													<input type="file" name="custom_marker_upload">
-												</label>
-											</p>
-											<p class="text">
-												Recommended dimensions: 36 x 36<br>
-												Maximum filesize: 10KB
-											</p>
-										</div>
-			
-										<div class="option-upload-step option-upload-step-2">
-											<p class="load"><span>Uploading <em>file</em></span></p>
-										</div>
-			
-										<div class="option-upload-step option-upload-step-3">
-											<p class="bttn"><button class="button white buttonsmall">Change marker</button></p>
-											<p class="text">Remove this file so you can upload another in its place.</p>
-										</div>
-			
-									</div>
+									<?php foreach( ['pushpin', 'circle', 'square'] as $index => $pinType ): ?>
+										<div class="option-image <?php _e( $index == 0 ? 'option-image-selected' : '') ?>" style="background-image: url(<?php _e( MAP_GENERATOR_PLUGIN_URL . 'assets/images/' . $pinType . '.png') ?>)"></div>
+									<?php endforeach; ?>
 								</div>
 							</div>
 			
 							<div class="map-options-col map-styles">
 								<h3>Map style</h3>
 			
-								<div class="option-images"></div>
+								<div class="option-images">
+									<?php foreach( ['simple', 'midnight', 'grayscale', 'subtle', 'paledawn', 'bluewater'] as $index => $mapType ): ?>
+										<div class="option-image <?php _e( $index == 0 ? 'option-image-selected' : '') ?>" style="background-image: url(<?php _e( MAP_GENERATOR_PLUGIN_URL . 'assets/images/' . $mapType . '.png') ?>)"></div>
+									<?php endforeach; ?>
+								</div>
 							</div>
 			
 						</div><!--/stylingOptions-->

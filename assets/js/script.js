@@ -61,6 +61,7 @@
     latitude: '',
     longitude: ''
   };
+  var columnCount = 0, rowCount = 0;
 
   // generate table from textarea
   var MapGeneratorTableize = function (sourceEle) {
@@ -101,7 +102,11 @@
     $table.append($tr)
 
     // Add content
-    csvArray.slice(commentLineCount + 1, csvArray.length).forEach(function (lineArray) {
+    let rowDataList = csvArray.slice(commentLineCount + 1, csvArray.length);
+    columnCount = columnNames.length;
+    rowCount = rowDataList.length;
+
+    rowDataList.forEach(function (lineArray) {
       $table.append($("<tr />").append(lineArray.map(function (a) {
         return $("<td />", {
           html: a.length ? a : " "
@@ -214,6 +219,9 @@
 
   // validate source data
   var validateSource = function () {
+    $("#num_of_columns").text(columnCount);
+    $("#num_of_rows").text(rowCount);
+
     $.each([{ selector: "#clustering_icon_sel", default: null }].concat($selectEleList), function (sel_idx, $selectEle) {
       $.each(columnNames, function (col_idx, columnName) {
         let selected = "";
@@ -406,5 +414,13 @@
 
   $("#clustering_cb").change(function () {
     $("#clusteroptions").toggle();
+  });
+
+  $("#validate_button").trigger('click');
+  $("#advanced_button").trigger('click');
+
+  $(".map-generator #fields .map-options-col .option-images .option-image").click(function() {
+    $(this).siblings().removeClass("option-image-selected");
+    $(this).addClass("option-image-selected");
   });
 })(jQuery)
