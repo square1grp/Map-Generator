@@ -24,7 +24,7 @@
     selector: "#desc_sel",
     default: "Description"
   }, {
-    selector: "#countryfield_sel",
+    selector: "#country_sel",
     default: "Country"
   }, {
     selector: "#descURL_sel",
@@ -39,9 +39,24 @@
     selector: "#lat_sel",
     default: "Latitude"
   }, {
-    selector: "#long_sel",
+    selector: "#lon_sel",
     default: "Longitude"
   }];
+  var markerBoxPreviewDefaultArgs = {
+    address: '',
+    city: '',
+    state: '',
+    zip: '',
+    group: '',
+    title: '',
+    description: '',
+    country: '',
+    url: 'javascript:void(0)',
+    imageURL: '',
+    email: '',
+    latitude: '',
+    longitude: ''
+  };
 
   // generate table from textarea
   var MapGeneratorTableize = function (sourceEle) {
@@ -155,6 +170,27 @@
     }
   };
 
+  // get column idx
+  var getColumnIndex = function (columnName) {
+    for (let colIdx = 0; colIdx < columnNames.length; colIdx++) {
+      if (columnName == columnNames[colIdx])
+        return colIdx;
+    }
+
+    return -1;
+  };
+
+  // get sample row field
+  var getSampleRowField = function (columnName) {
+    let colIdx = getColumnIndex(columnName);
+
+    if (colIdx !== -1) {
+      return sampleRow[colIdx];
+    }
+
+    return null;
+  };
+
   // init source data
   var unValidateSource = function () {
     $("#validate_status, #fields, #advancedOptions").slideUp();
@@ -162,6 +198,32 @@
     $.each($selectEleList, function (sel_idx, $selectedEle) {
       $($selectedEle.selector).find("option:not(:first-child)").remove()
     });
+
+    $(".map-generator #fields .map-options-col .markerLabel .markerContent > *").remove();
+  };
+
+  // update marker box preview
+  var updateMarkerBoxPreview = function () {
+    let markerBoxPreviewArgs = {
+      ...markerBoxPreviewDefaultArgs,
+      address: getSampleRowField($("#address_sel").val()),
+      city: getSampleRowField($("#city_sel").val()),
+      state: getSampleRowField($("#state_sel").val()),
+      zip: getSampleRowField($("#zip_sel").val()),
+      country: getSampleRowField($("#country_sel").val()),
+      group: getSampleRowField($("#group_sel").val()),
+      title: getSampleRowField($("#title_sel").val()),
+      description: getSampleRowField($("#desc_sel").val()),
+      url: getSampleRowField($("#descURL_sel").val()),
+      imageURL: getSampleRowField($("#descIMG_sel").val()),
+      email: getSampleRowField($("#email_sel").val()),
+      latitude: getSampleRowField($("#lat_sel").val()),
+      longitude: getSampleRowField($("#lon_sel").val())
+    };
+
+    let $html = generateMarkerBoxPreviewContent(markerBoxPreviewArgs);
+
+    $(".map-generator #fields .map-options-col .markerLabel .markerContent").html($html);
   };
 
   // validate source data
@@ -176,6 +238,8 @@
         $($selectedEle.selector).append(`<option value="${columnName}" ${selected}>${columnName}</option>`);
       });
     });
+
+    updateMarkerBoxPreview();
   };
 
   var dragFileCancelEvent = function (e) {

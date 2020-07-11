@@ -1,6 +1,5 @@
 /**
  * Convert CSV text to array.
- * Params: a: csvText, b: splitter
  */
 var csvToArray = function (a, b) {
   if (a) {
@@ -31,6 +30,9 @@ var csvToArray = function (a, b) {
   }
 };
 
+/**
+ * Convert Array to CSV Text
+ */
 var arrayToCsv = function (a, b) {
   for (var b = b || ",", d = "", e = 0; e < a.length; e++) {
     e && (d += "\n");
@@ -42,4 +44,19 @@ var arrayToCsv = function (a, b) {
     }
   }
   return d
+};
+
+
+/**
+ * Generate MarkerBoxPreview Content
+ */
+var generateMarkerBoxPreviewContent = function (markerBoxPreviewArgs, options = {}) {
+  $html = ``;
+
+  console.log(markerBoxPreviewArgs);
+
+  if (markerBoxPreviewArgs.title?.length)
+    $html += TEMPLATE_TITLE.replace('$$$MARKER_TITLE$$$', markerBoxPreviewArgs.title).replace('$$$MARKER_URL$$$', markerBoxPreviewArgs.url)
+
+  return $html;
 };

@@ -49,8 +49,8 @@ function map_generator_view() {
 							<h3>Basic options</h3>
 			
 							<div class="option-field">
-								<label for="country_sel">Region</label>
-								<select id="country_sel">
+								<label for="region_sel">Region</label>
+								<select id="region_sel">
 									<?php foreach( getRegions() as $r_abbr => $region ): ?>
 										<option value="<?php _e( $r_abbr ); ?>" <?php _e( $r_abbr == "us" ? "selected" : ""); ?>><?php _e( $region ); ?></option>
 									<?php endforeach; ?>
@@ -104,8 +104,8 @@ function map_generator_view() {
 								</div>
 			
 								<div class="option-field">
-									<label for="countryfield_sel">Country Field</label>
-									<select id="countryfield_sel">
+									<label for="country_sel">Country Field</label>
+									<select id="country_sel">
 										<option>&nbsp;</option>
 									</select>
 								</div>
@@ -139,8 +139,8 @@ function map_generator_view() {
 								</div>
 			
 								<div class="option-field">
-									<label for="long_sel">Longitude</label>
-									<select id="long_sel">
+									<label for="lon_sel">Longitude</label>
+									<select id="lon_sel">
 										<option value="-1">none</option>
 									</select>
 								</div>
