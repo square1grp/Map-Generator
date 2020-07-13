@@ -155,7 +155,7 @@
   padding-bottom: 10px;
   left: -30px;
   top: 0;
-  /* display: none; */
+  display: none;
 }
 
 .map-generator #fields .map-options-col.marker-colors .color-picker-wrapper .color-picker {

@@ -246,6 +246,8 @@
 
     let $table = $(".map-generator #fields .map-options-3-col .map-options-col table");
 
+    $table.find("tbody tr").remove();
+
     $.each(groups, function (groupIdx, group) {
       $table.append($("<tr />").append([
         `<div style="background-color: ${groupColors[groupIdx % groupColors.length]};">&nbsp;</div>`,
@@ -448,10 +450,10 @@
 
   $("#validate_button").on("click", function () {
     $("#validate_status").css({ display: "block" });
-    $("#fields").slideDown();
+    $("#fields").slideUp().slideDown();
 
     $("#advanced_button").show().on("click", function () {
-      $("#advancedOptions").slideDown();
+      $("#advancedOptions").slideUp().slideDown();
       $("#advanced_button").off('click').hide();
     });
     validateSource();
@@ -466,9 +468,6 @@
   $("#clustering_cb").change(function () {
     $("#clusteroptions").toggle();
   });
-
-  $("#validate_button").trigger('click');
-  $("#advanced_button").trigger('click');
 
   $(".map-generator #fields .map-options-col .option-images .option-image").click(function () {
     $(this).siblings().removeClass("option-image-selected");
