@@ -303,7 +303,7 @@
 
 .mr-auto,
 .mx-auto {
-  margin-right: auto;
+  margin-right: auto!important;
 }
 
 .mb-auto,
@@ -313,7 +313,7 @@
 
 .ml-auto,
 .mx-auto {
-  margin-left: auto;
+  margin-left: auto!important;
 }
 
 .text-center {

@@ -191,6 +191,7 @@ function map_generator_view() {
 										<?php foreach (["#fd7569", "#6996fd", "#95ea7b", "#fdeb5a", "#c699fd", "#bae1fd", "#fb8b07"] as $color): ?>
 											<div class="color-choice" style="background-color: <?php _e($color) ?>;"></div>
 										<?php endforeach; ?>
+										<div class="color-choice" style="background-color: #fb8b07;"></div>
 										<div class="color-picker-arrow"></div>
 									</div>
 								</div>
@@ -220,6 +221,10 @@ function map_generator_view() {
 			
 					</div><!--/advancedOptions-->
 			
+					<div class="button-group d-flex">
+						<input type="submit" id="geocode_button" value="Make Map" class="mx-auto geocode_button">
+					</div>
+					
 				</div>
 			</div>
 		</form>
