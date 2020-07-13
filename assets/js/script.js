@@ -450,12 +450,14 @@
 
   $("#validate_button").on("click", function () {
     $("#validate_status").css({ display: "block" });
-    $("#fields").slideUp().slideDown();
+    $("#fields").slideDown();
+    $("#advancedOptions").hide();
 
     $("#advanced_button").show().on("click", function () {
-      $("#advancedOptions").slideUp().slideDown();
+      $("#advancedOptions").slideDown();
       $("#advanced_button").off('click').hide();
     });
+
     validateSource();
   });
 
