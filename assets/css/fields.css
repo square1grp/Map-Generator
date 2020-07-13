@@ -124,24 +124,77 @@
 
 .map-generator #fields .map-options-3-col .map-options-col {
   width: 260px;
+  position: relative;
 }
 
 .map-generator #fields .map-options-col.marker-colors table {
   margin: 0;
 }
 
-.map-generator #fields .map-options-col.marker-colors th {
-  font-weight: 700;
+.map-generator #fields .map-options-col.marker-colors th,
+.map-generator #fields .map-options-col.marker-colors td {
   text-align: left;
   font-size: 12px;
   height: 20px;
   padding: 3px;
 }
 
+.map-generator #fields .map-options-col.marker-colors th {
+  font-weight: 700;
+}
+
 .map-generator #fields .map-options-col.marker-colors .color {
   width: 10%;
   padding: 3px;
   border-left: 0;
+}
+
+.map-generator #fields .map-options-col.marker-colors .color-picker-wrapper {
+  position: absolute;
+  width: 100px;
+  padding-bottom: 10px;
+  left: -30px;
+  top: 0;
+  /* display: none; */
+}
+
+.map-generator #fields .map-options-col.marker-colors .color-picker-wrapper .color-picker {
+  position: relative;
+  padding: 10px 5px 5px 10px;
+  background: #fff;
+  border: 1px solid #666;
+}
+
+.map-generator #fields .map-options-col.marker-colors .color-picker-wrapper .color-picker .color-choice {
+  float: left;
+  width: 15px;
+  height: 15px;
+  margin: 0 5px 5px 0;
+  background: #eee;
+  cursor: pointer;
+}
+
+.map-generator #fields .map-options-col.marker-colors .color-picker-wrapper .color-picker .color-picker-arrow {
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  height: 10px;
+  margin-left: -10px;
+}
+
+.map-generator #fields .map-options-col.marker-colors .color-picker-wrapper .color-picker .color-picker-arrow:after,
+.map-generator #fields .map-options-col.marker-colors .color-picker-wrapper .color-picker .color-picker-arrow:before {
+  position: absolute;
+  display: block;
+  content: " ";
+  border: 10px solid transparent;
+  border-top-color: #333;
+  border-bottom-width: 0;
+}
+
+.map-generator #fields .map-options-col.marker-colors .color-picker-wrapper .color-picker .color-picker-arrow:after {
+  top: -1px;
+  border-top-color: #fff;
 }
 
 .map-generator #fields .map-options-col #preview {

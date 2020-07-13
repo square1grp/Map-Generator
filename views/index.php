@@ -182,13 +182,17 @@ function map_generator_view() {
 												<th class="group">Group name</th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr class="hide">
-												<td class="color"><div>&nbsp;</div></td>
-												<td class="group">Template group</td>
-											</tr>
-										</tbody>
+										<tbody></tbody>
 									</table>
+								</div>
+
+								<div class="color-picker-wrapper" style="">
+									<div class="color-picker">
+										<?php foreach (["#fd7569", "#6996fd", "#95ea7b", "#fdeb5a", "#c699fd", "#bae1fd", "#fb8b07"] as $color): ?>
+											<div class="color-choice" style="background-color: <?php _e($color) ?>;"></div>
+										<?php endforeach; ?>
+										<div class="color-picker-arrow"></div>
+									</div>
 								</div>
 							</div>
 			

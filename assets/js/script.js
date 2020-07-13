@@ -62,10 +62,36 @@
     longitude: ''
   };
   var columnCount = 0, rowCount = 0;
+  var groupColors = ["#fd7569", "#6996fd", "#95ea7b", "#fdeb5a", "#c699fd", "#bae1fd", "#fb8b07"];
+
+  // get lines of csv
+  var getRowDataList = function (sourceEle, updateGlobalVars = true) {
+    let csvArray = csvToArray(sourceEle.value, String.fromCharCode(9));
+
+    let commentLineCount = 0;
+    while (csvArray[commentLineCount][0].substring(0, 1) === "#")
+      commentLineCount++;
+
+    // if csvArray length is 1, all are location data
+    if (csvArray.length === 1) {
+      let headerArray = Array(csvArray[0].length - 1).fill("")
+      csvArray.unshift(["Location"].concat(headerArray))
+    }
+
+    if (updateGlobalVars) {
+      // populate column names and sample row
+      columnNames = csvArray[commentLineCount];
+      sampleRow = csvArray[commentLineCount + 1];
+    }
+
+    return csvArray.slice(commentLineCount + 1, csvArray.length);
+  };
 
   // generate table from textarea
   var MapGeneratorTableize = function (sourceEle) {
     let csvArray = csvToArray(sourceEle.value, String.fromCharCode(9));
+    let rowDataList = getRowDataList(sourceEle);
+
     let $tableWrapper = $("<div />", {
       "class": "tableize tableize-wrapper"
     });
@@ -78,20 +104,6 @@
 
     sourceEle.$tableWrapper = $tableWrapper;
 
-    let commentLineCount = 0;
-    while (csvArray[commentLineCount][0].substring(0, 1) === "#")
-      commentLineCount++;
-
-    // if csvArray length is 1, all are location data
-    if (csvArray.length === 1) {
-      let headerArray = Array(csvArray[0].length - 1).fill("")
-      csvArray.unshift(["Location"].concat(headerArray))
-    }
-
-    // populate column names and sample row
-    columnNames = csvArray[commentLineCount];
-    sampleRow = csvArray[commentLineCount + 1];
-
     // Add Header
     let $tr = $("<tr />");
     columnNames.forEach(function (a) {
@@ -102,7 +114,6 @@
     $table.append($tr)
 
     // Add content
-    let rowDataList = csvArray.slice(commentLineCount + 1, csvArray.length);
     columnCount = columnNames.length;
     rowCount = rowDataList.length;
 
@@ -217,6 +228,45 @@
     $(".map-generator #fields .map-options-col .markerLabel .markerContent").html($html);
   };
 
+  // update color options
+  var updateColorOptions = function () {
+    let groups = [];
+    let rowDataList = getRowDataList(document.getElementById("sourceData"));
+
+    let groupColumnName = $("#group_sel").val();
+
+    if (groupColumnName == 'marker')
+      return false;
+
+    let columnIdx = getColumnIndex(columnNames, groupColumnName);
+    $.each(rowDataList, function (rowIdx, rowData) {
+      if (!groups.includes(rowData[columnIdx]))
+        groups.push(rowData[columnIdx]);
+    });
+
+    let $table = $(".map-generator #fields .map-options-3-col .map-options-col table");
+
+    $.each(groups, function (groupIdx, group) {
+      $table.append($("<tr />").append([
+        `<div style="background-color: ${groupColors[groupIdx % groupColors.length]};">&nbsp;</div>`,
+        group
+      ].map(function (html) {
+        return $("<td />", { html })
+      })))
+
+      $table.find(`tbody tr:nth-child(${groupIdx + 1}) td:first-child`)
+        .off('hover')
+        .on({
+          mouseenter: function () {
+            $(this).addClass("col-hover");
+            $(".map-generator #fields .map-options-3-col .map-options-col .color-picker-wrapper").css({
+              top: `${23 * groupIdx}px`
+            }).show();
+          }
+        });
+    });
+  };
+
   // validate source data
   var validateSource = function () {
     $("#num_of_columns").text(columnCount);
@@ -234,6 +284,7 @@
     });
 
     updateMarkerBoxPreview();
+    updateColorOptions();
   };
 
   var dragFileCancelEvent = function (e) {
@@ -419,8 +470,22 @@
   $("#validate_button").trigger('click');
   $("#advanced_button").trigger('click');
 
-  $(".map-generator #fields .map-options-col .option-images .option-image").click(function() {
+  $(".map-generator #fields .map-options-col .option-images .option-image").click(function () {
     $(this).siblings().removeClass("option-image-selected");
     $(this).addClass("option-image-selected");
   });
+
+  $(".map-generator #fields .map-options-3-col .map-options-col.marker-colors")
+    .off('mouseleave')
+    .on('mouseleave', function () {
+      $(".map-generator #fields .map-options-3-col .map-options-col .color-picker-wrapper").hide();
+      $(".map-generator #fields .map-options-3-col .map-options-col .col-hover").removeClass("col-hover");
+    });
+
+  $(".map-generator #fields .map-options-3-col .map-options-col .color-picker-wrapper .color-choice")
+    .off("click")
+    .on("click", function () {
+      let style = $(this).attr("style");
+      $(".map-generator #fields .map-options-3-col .map-options-col .col-hover div").attr("style", style);
+    });
 })(jQuery)

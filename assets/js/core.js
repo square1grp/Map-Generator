@@ -57,11 +57,11 @@ var getColumnIndex = function (columnNames, columnName) {
 };
 
 // get sample row field
-var getSampleRowField = function (sampleRow, columnNames, columnName) {
+var getCellValuefromRow = function (rowData, columnNames, columnName) {
   let colIdx = getColumnIndex(columnNames, columnName);
 
   if (colIdx !== -1) {
-    return sampleRow[colIdx];
+    return rowData[colIdx];
   }
 
   return '';
@@ -91,19 +91,17 @@ var getSampleRowField = function (sampleRow, columnNames, columnName) {
 var generateMarkerBoxPreviewContent = function (markerBoxPreviewArgs, options = {}) {
   $html = ``;
 
-  console.log(markerBoxPreviewArgs);
-
   if (markerBoxPreviewArgs.title?.length)
     $html += TEMPLATE_TITLE
       .replace(/MARKER_TITLE/g,
-        getSampleRowField(
+        getCellValuefromRow(
           markerBoxPreviewArgs.sampleRow,
           markerBoxPreviewArgs.columnNames,
           markerBoxPreviewArgs.title
         )
       )
       .replace(/MARKER_URL/g,
-        getSampleRowField(
+        getCellValuefromRow(
           markerBoxPreviewArgs.sampleRow,
           markerBoxPreviewArgs.columnNames,
           markerBoxPreviewArgs.url
@@ -123,35 +121,35 @@ var generateMarkerBoxPreviewContent = function (markerBoxPreviewArgs, options = 
   ) {
     $html += TEMPLATE_LOCATION
       .replace(/MARKER_ADDRESS/g,
-        getSampleRowField(
+        getCellValuefromRow(
           markerBoxPreviewArgs.sampleRow,
           markerBoxPreviewArgs.columnNames,
           markerBoxPreviewArgs.address
         )
       )
       .replace(/MARKER_CITY/g,
-        getSampleRowField(
+        getCellValuefromRow(
           markerBoxPreviewArgs.sampleRow,
           markerBoxPreviewArgs.columnNames,
           markerBoxPreviewArgs.city
         )
       )
       .replace(/MARKER_STATE/g,
-        getSampleRowField(
+        getCellValuefromRow(
           markerBoxPreviewArgs.sampleRow,
           markerBoxPreviewArgs.columnNames,
           markerBoxPreviewArgs.state
         )
       )
       .replace(/MARKER_ZIP/g,
-        getSampleRowField(
+        getCellValuefromRow(
           markerBoxPreviewArgs.sampleRow,
           markerBoxPreviewArgs.columnNames,
           markerBoxPreviewArgs.zip
         )
       )
       .replace(/MARKER_COUNTRY/g,
-        getSampleRowField(
+        getCellValuefromRow(
           markerBoxPreviewArgs.sampleRow,
           markerBoxPreviewArgs.columnNames,
           markerBoxPreviewArgs.country
@@ -161,7 +159,7 @@ var generateMarkerBoxPreviewContent = function (markerBoxPreviewArgs, options = 
 
   if (markerBoxPreviewArgs.email.length)
     $html += TEMPLATE_EMAIL.replace(/MARKER_EMAIL/g,
-      getSampleRowField(
+      getCellValuefromRow(
         markerBoxPreviewArgs.sampleRow,
         markerBoxPreviewArgs.columnNames,
         markerBoxPreviewArgs.email
@@ -170,7 +168,7 @@ var generateMarkerBoxPreviewContent = function (markerBoxPreviewArgs, options = 
 
   if (markerBoxPreviewArgs.phonenumber.length)
     $html += TEMPLATE_PHONENUMBER.replace(/MARKER_PHONENUMBER/g,
-      getSampleRowField(
+      getCellValuefromRow(
         markerBoxPreviewArgs.sampleRow,
         markerBoxPreviewArgs.columnNames,
         markerBoxPreviewArgs.phonenumber
@@ -204,7 +202,7 @@ var generateMarkerBoxPreviewContent = function (markerBoxPreviewArgs, options = 
             .replace(/MARKER_DESCRIPTION_NAME/g, columnName)
             .replace(
               /MARKER_DESCRIPTION_VALUE/g,
-              getSampleRowField(
+              getCellValuefromRow(
                 markerBoxPreviewArgs.sampleRow,
                 markerBoxPreviewArgs.columnNames,
                 columnName
@@ -217,7 +215,7 @@ var generateMarkerBoxPreviewContent = function (markerBoxPreviewArgs, options = 
         .replace(/MARKER_DESCRIPTION_NAME/g, markerBoxPreviewArgs.description)
         .replace(
           /MARKER_DESCRIPTION_VALUE/g,
-          getSampleRowField(
+          getCellValuefromRow(
             markerBoxPreviewArgs.sampleRow,
             markerBoxPreviewArgs.columnNames,
             markerBoxPreviewArgs.description
