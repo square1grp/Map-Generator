@@ -292,8 +292,15 @@
 
   // get map marker Icon
   var getMapMarkerIcon = function (colorPallet) {
-    let pinType = $(".map-generator #fields .map-options-col .option-images .option-image-selected").attr("pin-type");
+    let pinType = $(".map-generator #fields .map-options-col.marker-shapes .option-images .option-image-selected").attr("pin-type");
     return `https://staticnode.batchgeo.com/marker/svg?type=${pinType}Plain&size=20&fill=${colorPallet}&text=`
+  };
+
+  // get map type
+  var getMapThemeOptions = function () {
+    let mapType = $(".map-generator #fields .map-options-col.map-styles .option-images .option-image-selected").attr("map-type");
+
+    return mapThemeOptions[mapType];
   };
 
   // update map legends
@@ -720,6 +727,7 @@
       zoomControlOptions: {
         position: google.maps.ControlPosition.LEFT_TOP
       },
+      styles: getMapThemeOptions()
     });
 
     isMapAvaialble = true;

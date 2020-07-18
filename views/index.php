@@ -211,7 +211,7 @@ function map_generator_view() {
 			
 								<div class="option-images">
 									<?php foreach( ['simple', 'midnight', 'grayscale', 'subtle', 'paledawn', 'bluewater'] as $index => $mapType ): ?>
-										<div class="option-image <?php _e( $index == 0 ? 'option-image-selected' : '') ?>" style="background-image: url(<?php _e( MAP_GENERATOR_PLUGIN_URL . 'assets/images/' . $mapType . '.png') ?>)"></div>
+										<div class="option-image <?php _e( $index == 0 ? 'option-image-selected' : '') ?>" map-type="<?php _e( $mapType ) ?>" style="background-image: url(<?php _e( MAP_GENERATOR_PLUGIN_URL . 'assets/images/' . $mapType . '.png') ?>)"></div>
 									<?php endforeach; ?>
 								</div>
 							</div>
