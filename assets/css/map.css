@@ -1,0 +1,70 @@
+#map-generator #map {
+  height: 450px;
+  width: 100%;
+  display: none;
+  overflow: hidden;
+}
+
+#map-generator #legWrap {
+  display: none;
+  text-align: left;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 10px 0px;
+  position: relative;
+  line-height: 1.2;
+}
+
+#legDiv {
+  margin: 0 auto;
+  padding: 0;
+  font-size: 12px;
+  color: #fff;
+  width: 100%;
+}
+
+#legDiv .columnWrap {
+  position: relative;
+  display: table-cell;
+}
+
+#legDiv .columnWrap.no-menu .columnName {
+  padding: 5px 9px;
+  margin-left: 10px;
+  display: inline-block;
+  margin-right: 15px;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  position: relative;
+}
+
+#legDiv .groupList {
+  display: table-cell;
+  margin: 0;
+  line-height: 20px;
+}
+
+#legDiv .groupList li {
+  display: inline-block;
+  margin: 0px;
+  margin-right: 20px;
+  padding: 4px 8px 4px 21px;
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: left center;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+#legDiv .groupList li.active,
+#legDiv .groupList li:hover {
+  background-position: left -1px;
+  color: #fffb73;
+}
+
+#legDiv .groupList li.inactive {
+  opacity: 0.5;
+}

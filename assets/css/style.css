@@ -1,6 +1,7 @@
 @import url("global.css");
 @import url("fieldset.css");
 @import url("fields.css");
+@import url("map.css");
 
 #map-generator {
   font-size: 14px;

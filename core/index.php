@@ -3,6 +3,8 @@ require_once MAP_GENERATOR_PLUGIN_PATH . 'vendor/autoload.php';
 
 require_once 'spreadsheet.php';
 
+require_once 'map.php';
+
 function generateSpreadsheetView( $sheetData=[], $classname='' ) {
   $is_parsingStarted = false;
   $is_setHeader = false;

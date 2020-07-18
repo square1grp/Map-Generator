@@ -1,0 +1,1804 @@
+[
+  {
+    "results": [
+      {
+        "address_components": [
+          {
+            "long_name": "1",
+            "short_name": "1",
+            "types": [
+              "street_number"
+            ]
+          },
+          {
+            "long_name": "Crossgates Mall Road",
+            "short_name": "Crossgates Mall Rd",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "Albany",
+            "short_name": "Albany",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Guilderland",
+            "short_name": "Guilderland",
+            "types": [
+              "administrative_area_level_3",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Albany County",
+            "short_name": "Albany County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "New York",
+            "short_name": "NY",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "12203",
+            "short_name": "12203",
+            "types": [
+              "postal_code"
+            ]
+          }
+        ],
+        "formatted_address": "1 Crossgates Mall Rd, Albany, NY 12203, USA",
+        "geometry": {
+          "location": {
+            "lat": 42.689901,
+            "lng": -73.84988729999999
+          },
+          "location_type": "ROOFTOP",
+          "viewport": {
+            "northeast": {
+              "lat": 42.6912499802915,
+              "lng": -73.84853831970848
+            },
+            "southwest": {
+              "lat": 42.6885520197085,
+              "lng": -73.8512362802915
+            }
+          }
+        },
+        "place_id": "ChIJgahUpM103okRNvtNpBzsmsw",
+        "plus_code": {
+          "compound_code": "M5Q2+X2 Albany, NY, USA",
+          "global_code": "87J8M5Q2+X2"
+        },
+        "types": [
+          "street_address"
+        ]
+      }
+    ],
+    "status": "OK"
+  },
+  {
+    "results": [
+      {
+        "address_components": [
+          {
+            "long_name": "Walden Avenue",
+            "short_name": "Walden Ave",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "Erie County",
+            "short_name": "Erie County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "New York",
+            "short_name": "NY",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          }
+        ],
+        "formatted_address": "Walden Ave, New York, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 42.9467728,
+              "lng": -78.52065
+            },
+            "southwest": {
+              "lat": 42.89591230000001,
+              "lng": -78.8382644
+            }
+          },
+          "location": {
+            "lat": 42.9145188,
+            "lng": -78.6803314
+          },
+          "location_type": "GEOMETRIC_CENTER",
+          "viewport": {
+            "northeast": {
+              "lat": 42.9467728,
+              "lng": -78.52065
+            },
+            "southwest": {
+              "lat": 42.89591230000001,
+              "lng": -78.8382644
+            }
+          }
+        },
+        "place_id": "ChIJxbdQ28oK04kR1NEPI2UsIoo",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "Walden Avenue",
+            "short_name": "Walden Ave",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "Middletown",
+            "short_name": "Middletown",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Monmouth County",
+            "short_name": "Monmouth County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "New Jersey",
+            "short_name": "NJ",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "07737",
+            "short_name": "07737",
+            "types": [
+              "postal_code"
+            ]
+          }
+        ],
+        "formatted_address": "Walden Ave, Middletown, NJ 07737, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 40.4145367,
+              "lng": -74.06264569999999
+            },
+            "southwest": {
+              "lat": 40.4143265,
+              "lng": -74.0635865
+            }
+          },
+          "location": {
+            "lat": 40.4144692,
+            "lng": -74.0632333
+          },
+          "location_type": "GEOMETRIC_CENTER",
+          "viewport": {
+            "northeast": {
+              "lat": 40.4157805802915,
+              "lng": -74.06176711970849
+            },
+            "southwest": {
+              "lat": 40.4130826197085,
+              "lng": -74.06446508029151
+            }
+          }
+        },
+        "place_id": "ChIJ-bxQJjI3wokRHvcWgmRM0x4",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "Walden Avenue",
+            "short_name": "Walden Ave",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "Newcastle",
+            "short_name": "Newcastle",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Weston County",
+            "short_name": "Weston County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Wyoming",
+            "short_name": "WY",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "82701",
+            "short_name": "82701",
+            "types": [
+              "postal_code"
+            ]
+          }
+        ],
+        "formatted_address": "Walden Ave, Newcastle, WY 82701, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 43.8584907,
+              "lng": -104.2079854
+            },
+            "southwest": {
+              "lat": 43.8560564,
+              "lng": -104.208712
+            }
+          },
+          "location": {
+            "lat": 43.8573681,
+            "lng": -104.2080929
+          },
+          "location_type": "GEOMETRIC_CENTER",
+          "viewport": {
+            "northeast": {
+              "lat": 43.8586225302915,
+              "lng": -104.2069997197085
+            },
+            "southwest": {
+              "lat": 43.8559245697085,
+              "lng": -104.2096976802915
+            }
+          }
+        },
+        "place_id": "ChIJSUAUcJqLYocRNVtV4p_d1FA",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "Walden Avenue",
+            "short_name": "Walden Ave",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "Harriman",
+            "short_name": "Harriman",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Roane County",
+            "short_name": "Roane County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Tennessee",
+            "short_name": "TN",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "37748",
+            "short_name": "37748",
+            "types": [
+              "postal_code"
+            ]
+          }
+        ],
+        "formatted_address": "Walden Ave, Harriman, TN 37748, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 35.9354257,
+              "lng": -84.5464623
+            },
+            "southwest": {
+              "lat": 35.9297281,
+              "lng": -84.5523578
+            }
+          },
+          "location": {
+            "lat": 35.9323231,
+            "lng": -84.5493053
+          },
+          "location_type": "GEOMETRIC_CENTER",
+          "viewport": {
+            "northeast": {
+              "lat": 35.9354257,
+              "lng": -84.5464623
+            },
+            "southwest": {
+              "lat": 35.9297281,
+              "lng": -84.5523578
+            }
+          }
+        },
+        "place_id": "ChIJjU-H7_HcXYgRfnntAYJVLfQ",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "Walden Avenue",
+            "short_name": "Walden Ave",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "East Toledo",
+            "short_name": "East Toledo",
+            "types": [
+              "neighborhood",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Toledo",
+            "short_name": "Toledo",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Lucas County",
+            "short_name": "Lucas County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Ohio",
+            "short_name": "OH",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "43605",
+            "short_name": "43605",
+            "types": [
+              "postal_code"
+            ]
+          }
+        ],
+        "formatted_address": "Walden Ave, Toledo, OH 43605, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 41.6433975,
+              "lng": -83.52301229999999
+            },
+            "southwest": {
+              "lat": 41.639635,
+              "lng": -83.5236785
+            }
+          },
+          "location": {
+            "lat": 41.64156,
+            "lng": -83.52329999999999
+          },
+          "location_type": "GEOMETRIC_CENTER",
+          "viewport": {
+            "northeast": {
+              "lat": 41.6433975,
+              "lng": -83.52199641970849
+            },
+            "southwest": {
+              "lat": 41.639635,
+              "lng": -83.5246943802915
+            }
+          }
+        },
+        "place_id": "ChIJNfSwnr6GO4gR3-omWev-edc",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "Walden Avenue",
+            "short_name": "Walden Ave",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "Lake Magdalene",
+            "short_name": "Lake Magdalene",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Hillsborough County",
+            "short_name": "Hillsborough County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Florida",
+            "short_name": "FL",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "33618",
+            "short_name": "33618",
+            "types": [
+              "postal_code"
+            ]
+          }
+        ],
+        "formatted_address": "Walden Ave, Lake Magdalene, FL 33618, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 28.0989965,
+              "lng": -82.494903
+            },
+            "southwest": {
+              "lat": 28.0948827,
+              "lng": -82.4955797
+            }
+          },
+          "location": {
+            "lat": 28.0972005,
+            "lng": -82.4952543
+          },
+          "location_type": "GEOMETRIC_CENTER",
+          "viewport": {
+            "northeast": {
+              "lat": 28.0989965,
+              "lng": -82.49389236970848
+            },
+            "southwest": {
+              "lat": 28.0948827,
+              "lng": -82.4965903302915
+            }
+          }
+        },
+        "place_id": "ChIJC86CtF-_wogRgr2cjdhYfVg",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "Walden Avenue",
+            "short_name": "Walden Ave",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "Oliver Springs",
+            "short_name": "Oliver Springs",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Anderson County",
+            "short_name": "Anderson County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Tennessee",
+            "short_name": "TN",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "37840",
+            "short_name": "37840",
+            "types": [
+              "postal_code"
+            ]
+          }
+        ],
+        "formatted_address": "Walden Ave, Oliver Springs, TN 37840, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 36.046006,
+              "lng": -84.3292244
+            },
+            "southwest": {
+              "lat": 36.0448033,
+              "lng": -84.3348233
+            }
+          },
+          "location": {
+            "lat": 36.0454674,
+            "lng": -84.3321905
+          },
+          "location_type": "GEOMETRIC_CENTER",
+          "viewport": {
+            "northeast": {
+              "lat": 36.04675363029151,
+              "lng": -84.3292244
+            },
+            "southwest": {
+              "lat": 36.04405566970851,
+              "lng": -84.3348233
+            }
+          }
+        },
+        "place_id": "ChIJH3D2IIvLXYgRly2n806H9o8",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "Walden Avenue",
+            "short_name": "Walden Ave",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "McLeod County",
+            "short_name": "McLeod County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Minnesota",
+            "short_name": "MN",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "55350",
+            "short_name": "55350",
+            "types": [
+              "postal_code"
+            ]
+          }
+        ],
+        "formatted_address": "Walden Ave, Minnesota 55350, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 44.946399,
+              "lng": -94.4431109
+            },
+            "southwest": {
+              "lat": 44.8197943,
+              "lng": -94.46967649999999
+            }
+          },
+          "location": {
+            "lat": 44.8816997,
+            "lng": -94.45750609999999
+          },
+          "location_type": "GEOMETRIC_CENTER",
+          "viewport": {
+            "northeast": {
+              "lat": 44.946399,
+              "lng": -94.4431109
+            },
+            "southwest": {
+              "lat": 44.8197943,
+              "lng": -94.46967649999999
+            }
+          }
+        },
+        "place_id": "ChIJ6b_M71t-9YcRJSOB106qnjo",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "Walden Avenue",
+            "short_name": "Walden Ave",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "Lakewood",
+            "short_name": "Lakewood",
+            "types": [
+              "neighborhood",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Lakewood Township",
+            "short_name": "Lakewood Township",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Ocean County",
+            "short_name": "Ocean County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "New Jersey",
+            "short_name": "NJ",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "08701",
+            "short_name": "08701",
+            "types": [
+              "postal_code"
+            ]
+          }
+        ],
+        "formatted_address": "Walden Ave, Lakewood Township, NJ 08701, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 40.1068508,
+              "lng": -74.23554039999999
+            },
+            "southwest": {
+              "lat": 40.1046926,
+              "lng": -74.2366408
+            }
+          },
+          "location": {
+            "lat": 40.105875,
+            "lng": -74.235919
+          },
+          "location_type": "GEOMETRIC_CENTER",
+          "viewport": {
+            "northeast": {
+              "lat": 40.1071206802915,
+              "lng": -74.23474161970849
+            },
+            "southwest": {
+              "lat": 40.1044227197085,
+              "lng": -74.23743958029151
+            }
+          }
+        },
+        "place_id": "ChIJ8b4WT7d4wYkRwDsaGqMkXEw",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "Walden Avenue",
+            "short_name": "Walden Ave",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "New Dorp",
+            "short_name": "New Dorp",
+            "types": [
+              "neighborhood",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Staten Island",
+            "short_name": "Staten Island",
+            "types": [
+              "political",
+              "sublocality",
+              "sublocality_level_1"
+            ]
+          },
+          {
+            "long_name": "Richmond County",
+            "short_name": "Richmond County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "New York",
+            "short_name": "NY",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "10306",
+            "short_name": "10306",
+            "types": [
+              "postal_code"
+            ]
+          }
+        ],
+        "formatted_address": "Walden Ave, Staten Island, NY 10306, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 40.580268,
+              "lng": -74.11995859999999
+            },
+            "southwest": {
+              "lat": 40.5774282,
+              "lng": -74.1215185
+            }
+          },
+          "location": {
+            "lat": 40.5788345,
+            "lng": -74.1206754
+          },
+          "location_type": "GEOMETRIC_CENTER",
+          "viewport": {
+            "northeast": {
+              "lat": 40.580268,
+              "lng": -74.11938956970849
+            },
+            "southwest": {
+              "lat": 40.5774282,
+              "lng": -74.12208753029151
+            }
+          }
+        },
+        "place_id": "ChIJ0yvxA6tOwokRGKvUFW5WuLI",
+        "types": [
+          "route"
+        ]
+      }
+    ],
+    "status": "OK"
+  },
+  {
+    "results": [
+      {
+        "address_components": [
+          {
+            "long_name": "630",
+            "short_name": "630",
+            "types": [
+              "street_number"
+            ]
+          },
+          {
+            "long_name": "Old Country Road",
+            "short_name": "Old Country Rd",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "Garden City",
+            "short_name": "Garden City",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Hempstead",
+            "short_name": "Hempstead",
+            "types": [
+              "administrative_area_level_3",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Nassau County",
+            "short_name": "Nassau County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "New York",
+            "short_name": "NY",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "11530",
+            "short_name": "11530",
+            "types": [
+              "postal_code"
+            ]
+          }
+        ],
+        "formatted_address": "630 Old Country Rd, Garden City, NY 11530, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 40.7377757,
+              "lng": -73.6130348
+            },
+            "southwest": {
+              "lat": 40.7376633,
+              "lng": -73.6132125
+            }
+          },
+          "location": {
+            "lat": 40.7377313,
+            "lng": -73.61312319999999
+          },
+          "location_type": "ROOFTOP",
+          "viewport": {
+            "northeast": {
+              "lat": 40.7390684802915,
+              "lng": -73.6117746697085
+            },
+            "southwest": {
+              "lat": 40.7363705197085,
+              "lng": -73.6144726302915
+            }
+          }
+        },
+        "place_id": "ChIJJX0DGHx9wokRmK6XqVb--iw",
+        "types": [
+          "subpremise"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "630",
+            "short_name": "630",
+            "types": [
+              "street_number"
+            ]
+          },
+          {
+            "long_name": "Old Country Road",
+            "short_name": "Old Country Rd",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "Garden City",
+            "short_name": "Garden City",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Hempstead",
+            "short_name": "Hempstead",
+            "types": [
+              "administrative_area_level_3",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Nassau County",
+            "short_name": "Nassau County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "New York",
+            "short_name": "NY",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "11530",
+            "short_name": "11530",
+            "types": [
+              "postal_code"
+            ]
+          }
+        ],
+        "formatted_address": "630 Old Country Rd, Garden City, NY 11530, USA",
+        "geometry": {
+          "location": {
+            "lat": 40.7382095,
+            "lng": -73.6143694
+          },
+          "location_type": "ROOFTOP",
+          "viewport": {
+            "northeast": {
+              "lat": 40.7395584802915,
+              "lng": -73.6130204197085
+            },
+            "southwest": {
+              "lat": 40.7368605197085,
+              "lng": -73.61571838029151
+            }
+          }
+        },
+        "place_id": "ChIJH7MTwX19wokRkHeNvYXQo_c",
+        "plus_code": {
+          "compound_code": "P9QP+77 Garden City, NY, USA",
+          "global_code": "87G8P9QP+77"
+        },
+        "types": [
+          "street_address"
+        ]
+      }
+    ],
+    "status": "OK"
+  },
+  {
+    "results": [
+      {
+        "address_components": [
+          {
+            "long_name": "160",
+            "short_name": "160",
+            "types": [
+              "street_number"
+            ]
+          },
+          {
+            "long_name": "Walt Whitman Road",
+            "short_name": "Walt Whitman Rd",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "Huntington Station",
+            "short_name": "Huntington Station",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Huntington",
+            "short_name": "Huntington",
+            "types": [
+              "administrative_area_level_3",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Suffolk County",
+            "short_name": "Suffolk County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "New York",
+            "short_name": "NY",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "11746",
+            "short_name": "11746",
+            "types": [
+              "postal_code"
+            ]
+          }
+        ],
+        "formatted_address": "160 Walt Whitman Rd, Huntington Station, NY 11746, USA",
+        "geometry": {
+          "location": {
+            "lat": 40.8229535,
+            "lng": -73.4106588
+          },
+          "location_type": "ROOFTOP",
+          "viewport": {
+            "northeast": {
+              "lat": 40.8243024802915,
+              "lng": -73.40930981970848
+            },
+            "southwest": {
+              "lat": 40.8216045197085,
+              "lng": -73.41200778029149
+            }
+          }
+        },
+        "place_id": "ChIJM_WENQQp6IkRb79odIjJUSE",
+        "plus_code": {
+          "compound_code": "RHFQ+5P Huntington Station, NY, USA",
+          "global_code": "87G8RHFQ+5P"
+        },
+        "types": [
+          "street_address"
+        ]
+      }
+    ],
+    "status": "OK"
+  },
+  {
+    "results": [
+      {
+        "address_components": [
+          {
+            "long_name": "9553",
+            "short_name": "9553",
+            "types": [
+              "street_number"
+            ]
+          },
+          {
+            "long_name": "Carousel Center",
+            "short_name": "Carousel Center",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "Lakefront",
+            "short_name": "Lakefront",
+            "types": [
+              "neighborhood",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Syracuse",
+            "short_name": "Syracuse",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Onondaga County",
+            "short_name": "Onondaga County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "New York",
+            "short_name": "NY",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "13290",
+            "short_name": "13290",
+            "types": [
+              "postal_code"
+            ]
+          }
+        ],
+        "formatted_address": "9553 Carousel Center, Syracuse, NY 13290, USA",
+        "geometry": {
+          "location": {
+            "lat": 43.0673192,
+            "lng": -76.1709896
+          },
+          "location_type": "RANGE_INTERPOLATED",
+          "viewport": {
+            "northeast": {
+              "lat": 43.0686681802915,
+              "lng": -76.16964061970849
+            },
+            "southwest": {
+              "lat": 43.0659702197085,
+              "lng": -76.17233858029151
+            }
+          }
+        },
+        "place_id": "Ei05NTUzIENhcm91c2VsIENlbnRlciwgU3lyYWN1c2UsIE5ZIDEzMjkwLCBVU0EiGxIZChQKEgmR63dBLPLZiRHUzLjNEEvWDRDRSg",
+        "types": [
+          "street_address"
+        ]
+      }
+    ],
+    "status": "OK"
+  },
+  {
+    "results": [
+      {
+        "address_components": [
+          {
+            "long_name": "2655",
+            "short_name": "2655",
+            "types": [
+              "street_number"
+            ]
+          },
+          {
+            "long_name": "Richmond Avenue",
+            "short_name": "Richmond Ave",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "New Springville",
+            "short_name": "New Springville",
+            "types": [
+              "neighborhood",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Staten Island",
+            "short_name": "Staten Island",
+            "types": [
+              "political",
+              "sublocality",
+              "sublocality_level_1"
+            ]
+          },
+          {
+            "long_name": "Richmond County",
+            "short_name": "Richmond County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "New York",
+            "short_name": "NY",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "10314",
+            "short_name": "10314",
+            "types": [
+              "postal_code"
+            ]
+          },
+          {
+            "long_name": "5821",
+            "short_name": "5821",
+            "types": [
+              "postal_code_suffix"
+            ]
+          }
+        ],
+        "formatted_address": "2655 Richmond Ave, Staten Island, NY 10314, USA",
+        "geometry": {
+          "location": {
+            "lat": 40.5811685,
+            "lng": -74.1647613
+          },
+          "location_type": "ROOFTOP",
+          "viewport": {
+            "northeast": {
+              "lat": 40.58251748029149,
+              "lng": -74.16341231970848
+            },
+            "southwest": {
+              "lat": 40.5798195197085,
+              "lng": -74.1661102802915
+            }
+          }
+        },
+        "place_id": "ChIJT4Efs4FLwokReaCD6h782G8",
+        "plus_code": {
+          "compound_code": "HRJP+F3 Staten Island, NY, USA",
+          "global_code": "87G7HRJP+F3"
+        },
+        "types": [
+          "street_address"
+        ]
+      }
+    ],
+    "status": "OK"
+  },
+  {
+    "results": [
+      {
+        "address_components": [
+          {
+            "long_name": "7979",
+            "short_name": "7979",
+            "types": [
+              "street_number"
+            ]
+          },
+          {
+            "long_name": "Pittsford Victor Road",
+            "short_name": "Pittsford Victor Rd",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "Victor",
+            "short_name": "Victor",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Victor",
+            "short_name": "Victor",
+            "types": [
+              "administrative_area_level_3",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Ontario County",
+            "short_name": "Ontario County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "New York",
+            "short_name": "NY",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "14564",
+            "short_name": "14564",
+            "types": [
+              "postal_code"
+            ]
+          }
+        ],
+        "formatted_address": "7979 Pittsford Victor Rd, Victor, NY 14564, USA",
+        "geometry": {
+          "location": {
+            "lat": 43.0299441,
+            "lng": -77.4437118
+          },
+          "location_type": "ROOFTOP",
+          "viewport": {
+            "northeast": {
+              "lat": 43.0312930802915,
+              "lng": -77.4423628197085
+            },
+            "southwest": {
+              "lat": 43.0285951197085,
+              "lng": -77.44506078029151
+            }
+          }
+        },
+        "place_id": "ChIJpdyN4dwz0YkRstyDjJN13gY",
+        "plus_code": {
+          "compound_code": "2HH4+XG Victor, NY, USA",
+          "global_code": "87M42HH4+XG"
+        },
+        "types": [
+          "street_address"
+        ]
+      }
+    ],
+    "status": "OK"
+  },
+  {
+    "results": [
+      {
+        "address_components": [
+          {
+            "long_name": "1591",
+            "short_name": "1591",
+            "types": [
+              "street_number"
+            ]
+          },
+          {
+            "long_name": "Palisades Center Drive",
+            "short_name": "Palisades Center Dr",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "West Nyack",
+            "short_name": "West Nyack",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Clarkstown",
+            "short_name": "Clarkstown",
+            "types": [
+              "administrative_area_level_3",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Rockland County",
+            "short_name": "Rockland County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "New York",
+            "short_name": "NY",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "10994",
+            "short_name": "10994",
+            "types": [
+              "postal_code"
+            ]
+          }
+        ],
+        "formatted_address": "1591 Palisades Center Dr, West Nyack, NY 10994, USA",
+        "geometry": {
+          "location": {
+            "lat": 41.0990311,
+            "lng": -73.95519019999999
+          },
+          "location_type": "RANGE_INTERPOLATED",
+          "viewport": {
+            "northeast": {
+              "lat": 41.10038008029149,
+              "lng": -73.95384121970848
+            },
+            "southwest": {
+              "lat": 41.09768211970849,
+              "lng": -73.9565391802915
+            }
+          }
+        },
+        "place_id": "EjMxNTkxIFBhbGlzYWRlcyBDZW50ZXIgRHIsIFdlc3QgTnlhY2ssIE5ZIDEwOTk0LCBVU0EiGxIZChQKEgnr1E_t5unCiRECmTgh3yTJChC3DA",
+        "types": [
+          "street_address"
+        ]
+      }
+    ],
+    "status": "OK"
+  },
+  {
+    "results": [
+      {
+        "address_components": [
+          {
+            "long_name": "125",
+            "short_name": "125",
+            "types": [
+              "street_number"
+            ]
+          },
+          {
+            "long_name": "Westchester Avenue",
+            "short_name": "Westchester Ave",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "White Plains",
+            "short_name": "White Plains",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Westchester County",
+            "short_name": "Westchester County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "New York",
+            "short_name": "NY",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "10601",
+            "short_name": "10601",
+            "types": [
+              "postal_code"
+            ]
+          }
+        ],
+        "formatted_address": "125 Westchester Ave, White Plains, NY 10601, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 41.0317622,
+              "lng": -73.7584674
+            },
+            "southwest": {
+              "lat": 41.0303699,
+              "lng": -73.7591716
+            }
+          },
+          "location": {
+            "lat": 41.0309786,
+            "lng": -73.7587258
+          },
+          "location_type": "ROOFTOP",
+          "viewport": {
+            "northeast": {
+              "lat": 41.0324150302915,
+              "lng": -73.7574705197085
+            },
+            "southwest": {
+              "lat": 41.0297170697085,
+              "lng": -73.76016848029151
+            }
+          }
+        },
+        "place_id": "ChIJDZNHMC6UwokRBANnDCFVCCE",
+        "types": [
+          "establishment",
+          "point_of_interest",
+          "subpremise"
+        ]
+      }
+    ],
+    "status": "OK"
+  },
+  {
+    "results": [
+      {
+        "address_components": [
+          {
+            "long_name": "103",
+            "short_name": "103",
+            "types": [
+              "street_number"
+            ]
+          },
+          {
+            "long_name": "Prince Street",
+            "short_name": "Prince St",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "Manhattan",
+            "short_name": "Manhattan",
+            "types": [
+              "political",
+              "sublocality",
+              "sublocality_level_1"
+            ]
+          },
+          {
+            "long_name": "New York",
+            "short_name": "New York",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "New York County",
+            "short_name": "New York County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "New York",
+            "short_name": "NY",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "10012",
+            "short_name": "10012",
+            "types": [
+              "postal_code"
+            ]
+          },
+          {
+            "long_name": "3218",
+            "short_name": "3218",
+            "types": [
+              "postal_code_suffix"
+            ]
+          }
+        ],
+        "formatted_address": "103 Prince St, New York, NY 10012, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 40.7253267,
+              "lng": -73.9986814
+            },
+            "southwest": {
+              "lat": 40.7249264,
+              "lng": -73.9992255
+            }
+          },
+          "location": {
+            "lat": 40.7251297,
+            "lng": -73.9989365
+          },
+          "location_type": "ROOFTOP",
+          "viewport": {
+            "northeast": {
+              "lat": 40.7264755302915,
+              "lng": -73.99760446970849
+            },
+            "southwest": {
+              "lat": 40.7237775697085,
+              "lng": -74.00030243029151
+            }
+          }
+        },
+        "place_id": "ChIJg6ep9Y5ZwokRVIkxqdR9v3I",
+        "types": [
+          "premise"
+        ]
+      }
+    ],
+    "status": "OK"
+  }
+]

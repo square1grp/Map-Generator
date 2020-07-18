@@ -1,4 +1,7 @@
 (function ($) {
+  var map = null;
+  // source Ele (textarea)
+  var sourceEle = document.getElementById("sourceData");
   // column names
   var columnNames = [];
   var sampleRow = [];
@@ -62,7 +65,12 @@
     longitude: ''
   };
   var columnCount = 0, rowCount = 0;
-  var groupColors = ["#fd7569", "#6996fd", "#95ea7b", "#fdeb5a", "#c699fd", "#bae1fd", "#fb8b07"];
+  var groupColors = {};
+  var colorPallets = ["red", "blue", "green", "yellow", "purple", "paleblue", "orange"]
+  var groupColorsHex = ["#fd7569", "#6996fd", "#95ea7b", "#fdeb5a", "#c699fd", "#bae1fd", "#fb8b07"];
+  var geodata = [];
+  var markers = [];
+  var isMapAvaialble = false;
 
   // get lines of csv
   var getRowDataList = function (sourceEle, updateGlobalVars = true) {
@@ -228,21 +236,31 @@
     $(".map-generator #fields .map-options-col .markerLabel .markerContent").html($html);
   };
 
+  // get groups
+  var getAllGroups = function () {
+    let groups = [];
+    let groupColumnName = $("#group_sel").val();
+    let columnIdx = getColumnIndex(columnNames, groupColumnName);
+    let rowDataList = getRowDataList(document.getElementById("sourceData"));
+
+    $.each(rowDataList, function (rowIdx, rowData) {
+      if (!groups.includes(rowData[columnIdx]))
+        groups.push(rowData[columnIdx]);
+    });
+
+    return groups;
+  };
+
   // update color options
   var updateColorOptions = function () {
-    let groups = [];
-    let rowDataList = getRowDataList(document.getElementById("sourceData"));
+    groupColors = {};
 
     let groupColumnName = $("#group_sel").val();
 
     if (groupColumnName == 'marker')
       return false;
 
-    let columnIdx = getColumnIndex(columnNames, groupColumnName);
-    $.each(rowDataList, function (rowIdx, rowData) {
-      if (!groups.includes(rowData[columnIdx]))
-        groups.push(rowData[columnIdx]);
-    });
+    let groups = getAllGroups();
 
     let $table = $(".map-generator #fields .map-options-3-col .map-options-col table");
 
@@ -250,16 +268,19 @@
 
     $.each(groups, function (groupIdx, group) {
       $table.append($("<tr />").append([
-        `<div style="background-color: ${groupColors[groupIdx % groupColors.length]};">&nbsp;</div>`,
+        `<div style="background-color: ${groupColorsHex[groupIdx % groupColorsHex.length]};">&nbsp;</div>`,
         group
       ].map(function (html) {
         return $("<td />", { html })
       })))
 
+      groupColors[group] = colorPallets[groupIdx % groupColorsHex.length];
+
       $table.find(`tbody tr:nth-child(${groupIdx + 1}) td:first-child`)
         .off('hover')
         .on({
           mouseenter: function () {
+            $(".map-generator #fields .map-options-3-col .map-options-col .col-hover").removeClass("col-hover");
             $(this).addClass("col-hover");
             $(".map-generator #fields .map-options-3-col .map-options-col .color-picker-wrapper").css({
               top: `${23 * groupIdx}px`
@@ -267,6 +288,57 @@
           }
         });
     });
+  };
+
+  // get map marker Icon
+  var getMapMarkerIcon = function (colorPallet) {
+    let pinType = $(".map-generator #fields .map-options-col .option-images .option-image-selected").attr("pin-type");
+    return `https://staticnode.batchgeo.com/marker/svg?type=${pinType}Plain&size=20&fill=${colorPallet}&text=`
+  };
+
+  // update map legends
+  var updateMapLegends = function () {
+    let groupColumnName = $("#group_sel").val();
+
+    $("#legDiv div.columnName").text(groupColumnName);
+    $("#legDiv ul.groupList li").remove();
+
+    Object.keys(groupColors).forEach(function (groupName) {
+      $("#legDiv ul.groupList").append(
+        TEMPLATE_GROUP_LEGEND.replace(/GROUP_IMAGE_URL/g, getMapMarkerIcon(groupColors[groupName])).replace(/GROUP_NAME/g, groupName)
+      );
+    });
+
+    $("#legDiv ul.groupList li")
+      .off("click")
+      .on("click", function (e) {
+        e.preventDefault();
+
+        if ($(this).hasClass("active")) {
+          $(this).removeClass("active");
+        } else {
+          $(this).addClass("active").removeClass("inactive");
+        }
+
+        if ($("#legDiv ul.groupList li.active").length) {
+          $("#legDiv ul.groupList li:not(.active)").addClass("inactive");
+        } else {
+          $("#legDiv ul.groupList li:not(.active)").removeClass("inactive");
+        }
+
+        let activeGroupNames = [];
+        $.each($("#legDiv ul.groupList li.active"), function () {
+          activeGroupNames.push($(this).text())
+        });
+
+        markers.forEach(function (marker) {
+          if (!activeGroupNames.length || activeGroupNames.includes(marker.group)) {
+            marker.marker.setMap(map);
+          } else {
+            marker.marker.setMap(null);
+          }
+        });
+      });
   };
 
   // validate source data
@@ -285,8 +357,22 @@
       });
     });
 
+    $("#group_sel")
+      .off("change")
+      .on("change", function () {
+        updateColorOptions();
+        updateMapLegends();
+
+        markers.forEach(function (marker) {
+          marker.marker.setMap(null);
+        });
+        markers = [];
+        addMarkers();
+      });
+
     updateMarkerBoxPreview();
     updateColorOptions();
+    updateMapLegends();
   };
 
   var dragFileCancelEvent = function (e) {
@@ -443,15 +529,127 @@
     }
   };
 
-  // source Ele (textarea)
-  var sourceEle = document.getElementById("sourceData");
+  // get center
+  var getCenter = function (geodata) {
+    let bound = null;
+
+    geodata.forEach(function (geo) {
+      console.log(geo)
+      if (bound == null) {
+        bound = {
+          min_lat: geo.geometry.location.lat,
+          min_lng: geo.geometry.location.lng,
+          max_lat: geo.geometry.location.lat,
+          max_lng: geo.geometry.location.lng,
+        };
+      } else {
+        if (geo.geometry.location.lat < bound.min_lat) {
+          bound.min_lat = geo.geometry.location.lat;
+        }
+
+        if (geo.geometry.location.lng < bound.min_lng) {
+          bound.min_lng = geo.geometry.location.lng;
+        }
+
+        if (geo.geometry.location.lat > bound.max_lat) {
+          bound.max_lat = geo.geometry.location.lat;
+        }
+
+        if (geo.geometry.location.lng > bound.max_lng) {
+          bound.max_lng = geo.geometry.location.lng;
+        }
+      }
+    });
+
+    return {
+      lat: (bound.max_lat + bound.min_lat) / 2,
+      lng: (bound.max_lng + bound.min_lng) / 2,
+    };
+  };
+
+  // add markers
+  var addMarkers = function () {
+    let rowDataList = getRowDataList(sourceEle, false);
+    let col_group = $("#group_sel").val();
+
+    let groupList = rowDataList.map(function (rowData) {
+      return `${getCellValuefromRow(rowData, columnNames, col_group)}`.trim();
+    });
+
+    geodata.forEach(function (geo, geoIdx) {
+      let groupName = groupList[geoIdx]
+
+      markers.push({
+        group: groupName,
+        marker: new google.maps.Marker({
+          position: geo.geometry.location,
+          map: map,
+          icon: getMapMarkerIcon(groupColors[groupName])
+        })
+      });
+    });
+  };
+
+  // geo-code
+  var doGeocode = function () {
+    let rowDataList = getRowDataList(sourceEle, false);
+
+    let col_address = $("#address_sel").val();
+    let col_city = $("#city_sel").val();
+    let col_state = $("#state_sel").val();
+    let col_zip = $("#zip_sel").val();
+    let col_country = $("#country_sel").val();
+
+    let addressList = rowDataList.map(function (rowData) {
+      let address = getCellValuefromRow(rowData, columnNames, col_address);
+      let city = getCellValuefromRow(rowData, columnNames, col_city);
+      let state = getCellValuefromRow(rowData, columnNames, col_state);
+      let zip = getCellValuefromRow(rowData, columnNames, col_zip);
+      let country = getCellValuefromRow(rowData, columnNames, col_country);
+
+      return `${address}, ${city}, ${state} ${zip} ${country}`.trim();
+    });
+
+    geodata = [];
+    markers = [];
+    $.post('/wp-json/map-generator/v1/geocoding', { addresses: addressList }, function (response) {
+      if (response.success) {
+        geodata = response.data.map(function (geo) {
+          if (geo.status == google.maps.GeocoderStatus.OK)
+            return geo.results[0];
+        });
+
+        if (!geodata.length) {
+          console.log("geocoding error");
+          return false;
+        }
+
+        let center = getCenter(geodata);
+
+        initMap(center);
+
+        addMarkers();
+
+        $("#map").slideDown();
+        $("#legWrap").slideDown();
+      } else {
+        console.log("geocoding error.");
+      }
+    });
+  };
+
   MapGeneratorTableize(sourceEle);
   initSourceDragDrop();
 
-  $("#validate_button").on("click", function () {
+  $("#validate_button").on("click", function (e) {
+    e.preventDefault();
+
     $("#validate_status").css({ display: "block" });
     $("#fields").slideDown();
     $("#advancedOptions").hide();
+    isMapAvaialble = false;
+    $("#map").hide();
+    $("#legWrap").hide();
 
     $("#advanced_button").show().on("click", function () {
       $("#advancedOptions").slideDown();
@@ -461,10 +659,19 @@
     validateSource();
   });
 
-  $.each($selectEleList, function (selIdx, $selectEle) {
-    $($selectEle.selector).on('change', function () {
-      updateMarkerBoxPreview()
-    });
+  $("#geocode_button").on("click", function (e) {
+    e.preventDefault();
+
+    doGeocode();
+    updateMapLegends();
+  });
+
+  $("#mapnow_button").on("click", function (e) {
+    e.preventDefault();
+
+    $("#geocode_button").show();
+    $("#validate_button").trigger("click");
+    $("#geocode_button").trigger("click");
   });
 
   $("#clustering_cb").change(function () {
@@ -488,5 +695,33 @@
     .on("click", function () {
       let style = $(this).attr("style");
       $(".map-generator #fields .map-options-3-col .map-options-col .col-hover div").attr("style", style);
+
+      let colorHex = $(this).attr("color-hex");
+      let colorIndex = null;
+      $.each(groupColorsHex, function (hexIndex) {
+        if (groupColorsHex[hexIndex] == colorHex)
+          colorIndex = hexIndex;
+      });
+      let selectedGroup = $(".map-generator #fields .map-options-3-col .map-options-col .col-hover+td").text();
+      getAllGroups().forEach(function (group) {
+        if (selectedGroup == group && colorIndex)
+          groupColors[group] = colorPallets[colorIndex];
+      });
     });
+
+  $("#mapnow_button").trigger("click");
+
+  var initMap = function (center) {
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 7,
+      center: center,
+      disableDefaultUI: true,
+      zoomControl: true,
+      zoomControlOptions: {
+        position: google.maps.ControlPosition.LEFT_TOP
+      },
+    });
+
+    isMapAvaialble = true;
+  };
 })(jQuery)

@@ -189,9 +189,8 @@ function map_generator_view() {
 								<div class="color-picker-wrapper" style="">
 									<div class="color-picker">
 										<?php foreach (["#fd7569", "#6996fd", "#95ea7b", "#fdeb5a", "#c699fd", "#bae1fd", "#fb8b07"] as $color): ?>
-											<div class="color-choice" style="background-color: <?php _e($color) ?>;"></div>
+											<div class="color-choice" color-hex="<?php _e( $color ) ?>" style="background-color: <?php _e($color) ?>;"></div>
 										<?php endforeach; ?>
-										<div class="color-choice" style="background-color: #fb8b07;"></div>
 										<div class="color-picker-arrow"></div>
 									</div>
 								</div>
@@ -202,7 +201,7 @@ function map_generator_view() {
 			
 								<div class="option-images">
 									<?php foreach( ['pushpin', 'circle', 'square'] as $index => $pinType ): ?>
-										<div class="option-image <?php _e( $index == 0 ? 'option-image-selected' : '') ?>" style="background-image: url(<?php _e( MAP_GENERATOR_PLUGIN_URL . 'assets/images/' . $pinType . '.png') ?>)"></div>
+										<div class="option-image <?php _e( $index == 0 ? 'option-image-selected' : '') ?>" pin-type="<?php _e( $pinType ) ?>" style="background-image: url(<?php _e( MAP_GENERATOR_PLUGIN_URL . 'assets/images/' . $pinType . '.png') ?>)"></div>
 									<?php endforeach; ?>
 								</div>
 							</div>
@@ -228,6 +227,16 @@ function map_generator_view() {
 				</div>
 			</div>
 		</form>
+		
+		<div id="map"></div>
+		<div id="legWrap">
+			<div id="legDiv">
+				<div class="columnWrap no-menu">
+					<div class="columnName"></div>
+				</div>
+				<ul class="groupList"></ul>
+			</div>
+		</div>
 	</div>
 
 	<script>
@@ -258,8 +267,15 @@ function map_generator_view() {
 		var TEMPLATE_DESCRIPTION = `
 			<div><span class="l">MARKER_DESCRIPTION_NAME:</span>&nbsp;MARKER_DESCRIPTION_VALUE</div>
 		`;
+
+		var TEMPLATE_GROUP_LEGEND = `
+			<li title="Toggle filtering for this grouping" style="background-image: url(GROUP_IMAGE_URL);">GROUP_NAME</li>
+		`;
 	</script>
 
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=<?php _e( GOOGLE_API_KEY ) ?>"></script>
+	
 <?php
 	wp_enqueue_style( 'map-generator' );
 	wp_enqueue_script( 'map-generator' );

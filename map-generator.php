@@ -11,6 +11,8 @@ define( 'MAP_GENERATOR_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 define( 'MAP_GENERATOR_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
+require_once 'config.php';
+
 require_once 'core/index.php';
 
 require_once 'views/index.php';
