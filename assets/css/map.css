@@ -79,11 +79,28 @@
 
 .gm-style .gm-style-iw-c {
   top: 120px;
+  background-color: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.gm-style .gm-style-iw-d {
+  overflow: visible !important;
+  max-height: none !important;
 }
 
 #map-generator .map-marker-info {
   position: relative;
   padding-right: 30px;
+  background-color: #fff;
+  padding: 10px;
+  min-width: 250px;
+  box-shadow: 0 2px 7px 1px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+#map-generator .map-marker-info.click-info {
+  top: 70px
 }
 
 #map-generator .map-marker-info a.close {
@@ -95,8 +112,8 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  right: 0px;
-  top: 0px;
+  right: 10px;
+  top: 10px;
 }
 
 #map-generator .map-marker-info .content {

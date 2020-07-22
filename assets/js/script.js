@@ -580,6 +580,18 @@
     };
   };
 
+  // close marker infowindow
+  window.closeMarkerInfoWindow = function (geoIdx) {
+    let marker = markers[geoIdx].marker;
+
+    marker.setIcon({
+      url: marker.icon.url,
+      scaledSize: new google.maps.Size(30, 30)
+    });
+
+    marker.clickInfoWindow.close();
+  };
+
   // add markers
   var addMarkers = function () {
     let rowDataList = getRowDataList(sourceEle, false);
@@ -604,7 +616,10 @@
       let marker = new google.maps.Marker({
         position: geo.geometry.location,
         map: map,
-        icon: getMapMarkerIcon(groupColors[groupName], labelText)
+        icon: {
+          url: getMapMarkerIcon(groupColors[groupName], labelText),
+          scaledSize: new google.maps.Size(30, 30)
+        }
       });
 
       let markerAddress = geoAddressList[geoIdx];
@@ -620,7 +635,7 @@
       marker.hoverInfoWindow = new google.maps.InfoWindow({
         disableAutoPan: true,
         content: `
-          <div class="map-marker-info">
+          <div class="map-marker-info hover-info">
             <p style="margin: 0;"><b>${markerTitle}</b><br/>${markerAddress}</p>
           </div>
         `
@@ -629,8 +644,8 @@
       marker.clickInfoWindow = new google.maps.InfoWindow({
         disableAutoPan: true,
         content: `
-          <div class="map-marker-info">
-            <a class="close" onClick="markers[${geoIdx}].marker.clickInfoWindow.close();">&times;</a>
+          <div class="map-marker-info click-info">
+            <a class="close" onClick="closeMarkerInfoWindow(${geoIdx})">&times;</a>
             <div class="content">${getMarkerBoxContent(markerRowData)}</div>
           </div>
         `
@@ -645,6 +660,11 @@
       });
 
       marker.addListener("click", function () {
+        marker.setIcon({
+          url: marker.icon.url,
+          scaledSize: new google.maps.Size(50, 50)
+        });
+
         marker.clickInfoWindow.open(marker.get("map"), marker);
       });
 
