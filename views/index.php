@@ -111,7 +111,7 @@ function map_generator_view() {
 								<label class="option-toggle" for="view_sel">
 									Select a default map view to show&nbsp;
 									<select id="view_sel">
-										<option>street</option>
+										<option>roadmap</option>
 										<option>satellite</option>
 										<option>hybrid</option>
 										<option>terrain</option>

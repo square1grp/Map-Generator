@@ -68,8 +68,9 @@
   var groupColors = {};
   var colorPallets = ["red", "blue", "green", "yellow", "purple", "paleblue", "orange"]
   var groupColorsHex = ["#fd7569", "#6996fd", "#95ea7b", "#fdeb5a", "#c699fd", "#bae1fd", "#fb8b07"];
-  var geodata = [];
-  var markers = [];
+  var geoAddressList = [];
+  var geoList = [];
+  window.markers = [];
   var isMapAvaialble = false;
 
   // get lines of csv
@@ -209,8 +210,8 @@
     $(".map-generator #fields .map-options-col .markerLabel .markerContent > *").remove();
   };
 
-  // update marker box preview
-  var updateMarkerBoxPreview = function () {
+  // get marker box content
+  var getMarkerBoxContent = function (rowData) {
     let markerBoxPreviewArgs = {
       ...markerBoxPreviewDefaultArgs,
       address: $("#address_sel").val(),
@@ -228,10 +229,15 @@
       latitude: $("#lat_sel").val(),
       longitude: $("#lon_sel").val(),
       columnNames: columnNames,
-      sampleRow: sampleRow
+      rowData: rowData
     };
 
-    let $html = generateMarkerBoxPreviewContent(markerBoxPreviewArgs);
+    return generateMarkerBoxPreviewContent(markerBoxPreviewArgs);
+  };
+
+  // update marker box preview
+  var updateMarkerBoxPreview = function () {
+    let $html = getMarkerBoxContent(sampleRow);
 
     $(".map-generator #fields .map-options-col .markerLabel .markerContent").html($html);
   };
@@ -291,9 +297,9 @@
   };
 
   // get map marker Icon
-  var getMapMarkerIcon = function (colorPallet) {
+  var getMapMarkerIcon = function (colorPallet, text = null) {
     let pinType = $(".map-generator #fields .map-options-col.marker-shapes .option-images .option-image-selected").attr("pin-type");
-    return `https://staticnode.batchgeo.com/marker/svg?type=${pinType}Plain&size=20&fill=${colorPallet}&text=`
+    return text ? `https://staticnode.batchgeo.com/marker/svg?type=${pinType}Text&size=20&fill=${colorPallet}&text=${text}` : `https://staticnode.batchgeo.com/marker/svg?type=${pinType}Plain&size=20&fill=${colorPallet}`
   };
 
   // get map type
@@ -338,7 +344,7 @@
           activeGroupNames.push($(this).text())
         });
 
-        markers.forEach(function (marker) {
+        window.markers.forEach(function (marker) {
           if (!activeGroupNames.length || activeGroupNames.includes(marker.group)) {
             marker.marker.setMap(map);
           } else {
@@ -370,10 +376,10 @@
         updateColorOptions();
         updateMapLegends();
 
-        markers.forEach(function (marker) {
+        window.markers.forEach(function (marker) {
           marker.marker.setMap(null);
         });
-        markers = [];
+        window.markers = [];
         addMarkers();
       });
 
@@ -537,10 +543,10 @@
   };
 
   // get center
-  var getCenter = function (geodata) {
+  var getCenter = function (geoList) {
     let bound = null;
 
-    geodata.forEach(function (geo) {
+    geoList.forEach(function (geo) {
       console.log(geo)
       if (bound == null) {
         bound = {
@@ -583,55 +589,119 @@
       return `${getCellValuefromRow(rowData, columnNames, col_group)}`.trim();
     });
 
-    geodata.forEach(function (geo, geoIdx) {
-      let groupName = groupList[geoIdx]
+    // labeltype
+    let labelType = $("#labeltype_sel").val();
 
-      markers.push({
-        group: groupName,
-        marker: new google.maps.Marker({
-          position: geo.geometry.location,
-          map: map,
-          icon: getMapMarkerIcon(groupColors[groupName])
-        })
+    geoList.forEach(function (geo, geoIdx) {
+      let groupName = groupList[geoIdx];
+
+      let labelText = '';
+      if (labelType == "letters")
+        labelText = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[geoIdx % 26];
+      else if (labelType == "numbers")
+        labelText = geoIdx + 1;
+
+      let marker = new google.maps.Marker({
+        position: geo.geometry.location,
+        map: map,
+        icon: getMapMarkerIcon(groupColors[groupName], labelText)
       });
+
+      let markerAddress = geoAddressList[geoIdx];
+      let markerTitle = '';
+      let markerRowData = {};
+      rowDataList.forEach(function (rowData) {
+        if (getRowAddress(rowData) == markerAddress) {
+          markerRowData = rowData;
+          markerTitle = getRowTitle(rowData);
+        }
+      });
+
+      marker.hoverInfoWindow = new google.maps.InfoWindow({
+        disableAutoPan: true,
+        content: `
+          <div class="map-marker-info">
+            <p style="margin: 0;"><b>${markerTitle}</b><br/>${markerAddress}</p>
+          </div>
+        `
+      });
+
+      marker.clickInfoWindow = new google.maps.InfoWindow({
+        disableAutoPan: true,
+        content: `
+          <div class="map-marker-info">
+            <a class="close" onClick="markers[${geoIdx}].marker.clickInfoWindow.close();">&times;</a>
+            <div class="content">${getMarkerBoxContent(markerRowData)}</div>
+          </div>
+        `
+      });
+
+      marker.addListener("mouseover", function () {
+        marker.hoverInfoWindow.open(marker.get("map"), marker);
+      });
+
+      marker.addListener("mouseout", function () {
+        marker.hoverInfoWindow.close();
+      });
+
+      marker.addListener("click", function () {
+        marker.clickInfoWindow.open(marker.get("map"), marker);
+      });
+
+      window.markers.push({ group: groupName, marker: marker });
     });
   };
 
-  // geo-code
-  var doGeocode = function () {
-    let rowDataList = getRowDataList(sourceEle, false);
+  // get row title
+  var getRowTitle = function (rowData) {
+    let col_title = $("#title_sel").val();
 
+    return getCellValuefromRow(rowData, columnNames, col_title);
+  };
+
+  // get address
+  var getRowAddress = function (rowData) {
     let col_address = $("#address_sel").val();
     let col_city = $("#city_sel").val();
     let col_state = $("#state_sel").val();
     let col_zip = $("#zip_sel").val();
     let col_country = $("#country_sel").val();
 
-    let addressList = rowDataList.map(function (rowData) {
-      let address = getCellValuefromRow(rowData, columnNames, col_address);
-      let city = getCellValuefromRow(rowData, columnNames, col_city);
-      let state = getCellValuefromRow(rowData, columnNames, col_state);
-      let zip = getCellValuefromRow(rowData, columnNames, col_zip);
-      let country = getCellValuefromRow(rowData, columnNames, col_country);
+    let address = getCellValuefromRow(rowData, columnNames, col_address);
+    let city = getCellValuefromRow(rowData, columnNames, col_city);
+    let state = getCellValuefromRow(rowData, columnNames, col_state);
+    let zip = getCellValuefromRow(rowData, columnNames, col_zip);
+    let country = getCellValuefromRow(rowData, columnNames, col_country);
 
-      return `${address}, ${city}, ${state} ${zip} ${country}`.trim();
+    return `${address}, ${city}, ${state} ${zip} ${country}`.trim();
+  };
+
+  // geo-code
+  var doGeocode = function () {
+    let rowDataList = getRowDataList(sourceEle, false);
+
+    let addressList = rowDataList.map(function (rowData) {
+      return getRowAddress(rowData);
     });
 
-    geodata = [];
-    markers = [];
+    geoAddressList = [];
+    geoList = [];
+    window.markers = [];
     $.post('/wp-json/map-generator/v1/geocoding', { addresses: addressList }, function (response) {
       if (response.success) {
-        geodata = response.data.map(function (geo) {
-          if (geo.status == google.maps.GeocoderStatus.OK)
-            return geo.results[0];
+        geoList = response.data.map(function (data) {
+          if (data.geo.status == google.maps.GeocoderStatus.OK) {
+            geoAddressList.push(data.address);
+            return data.geo.results[0];
+          }
         });
 
-        if (!geodata.length) {
+        if (!geoList.length) {
           console.log("geocoding error");
           return false;
         }
 
-        let center = getCenter(geodata);
+        let center = getCenter(geoList);
 
         initMap(center);
 
@@ -681,6 +751,12 @@
     $("#geocode_button").trigger("click");
   });
 
+  $.each($selectEleList, function (selIdx, $selectEle) {
+    $($selectEle.selector).on('change', function () {
+      updateMarkerBoxPreview()
+    });
+  });
+
   $("#clustering_cb").change(function () {
     $("#clusteroptions").toggle();
   });
@@ -717,11 +793,16 @@
     });
 
   $("#mapnow_button").trigger("click");
+  // $("#validate_button").trigger("click");
+  $("#advanced_button").trigger("click");
 
   var initMap = function (center) {
+    let mapTypeId = $("#view_sel").val();
+
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: 7,
       center: center,
+      mapTypeId: mapTypeId,
       disableDefaultUI: true,
       zoomControl: true,
       zoomControlOptions: {

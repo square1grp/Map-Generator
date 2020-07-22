@@ -85,7 +85,7 @@ var getCellValuefromRow = function (rowData, columnNames, columnName) {
     latitude: '',
     longitude: '',
     columnNames: [],
-    sampleRow: [{}, {}, ...]
+    rowData: [{}, {}, ...]
   }
  */
 var generateMarkerBoxPreviewContent = function (markerBoxPreviewArgs, options = {}) {
@@ -95,14 +95,14 @@ var generateMarkerBoxPreviewContent = function (markerBoxPreviewArgs, options = 
     $html += TEMPLATE_TITLE
       .replace(/MARKER_TITLE/g,
         getCellValuefromRow(
-          markerBoxPreviewArgs.sampleRow,
+          markerBoxPreviewArgs.rowData,
           markerBoxPreviewArgs.columnNames,
           markerBoxPreviewArgs.title
         )
       )
       .replace(/MARKER_URL/g,
         getCellValuefromRow(
-          markerBoxPreviewArgs.sampleRow,
+          markerBoxPreviewArgs.rowData,
           markerBoxPreviewArgs.columnNames,
           markerBoxPreviewArgs.url
         )
@@ -122,35 +122,35 @@ var generateMarkerBoxPreviewContent = function (markerBoxPreviewArgs, options = 
     $html += TEMPLATE_LOCATION
       .replace(/MARKER_ADDRESS/g,
         getCellValuefromRow(
-          markerBoxPreviewArgs.sampleRow,
+          markerBoxPreviewArgs.rowData,
           markerBoxPreviewArgs.columnNames,
           markerBoxPreviewArgs.address
         )
       )
       .replace(/MARKER_CITY/g,
         getCellValuefromRow(
-          markerBoxPreviewArgs.sampleRow,
+          markerBoxPreviewArgs.rowData,
           markerBoxPreviewArgs.columnNames,
           markerBoxPreviewArgs.city
         )
       )
       .replace(/MARKER_STATE/g,
         getCellValuefromRow(
-          markerBoxPreviewArgs.sampleRow,
+          markerBoxPreviewArgs.rowData,
           markerBoxPreviewArgs.columnNames,
           markerBoxPreviewArgs.state
         )
       )
       .replace(/MARKER_ZIP/g,
         getCellValuefromRow(
-          markerBoxPreviewArgs.sampleRow,
+          markerBoxPreviewArgs.rowData,
           markerBoxPreviewArgs.columnNames,
           markerBoxPreviewArgs.zip
         )
       )
       .replace(/MARKER_COUNTRY/g,
         getCellValuefromRow(
-          markerBoxPreviewArgs.sampleRow,
+          markerBoxPreviewArgs.rowData,
           markerBoxPreviewArgs.columnNames,
           markerBoxPreviewArgs.country
         )
@@ -160,7 +160,7 @@ var generateMarkerBoxPreviewContent = function (markerBoxPreviewArgs, options = 
   if (markerBoxPreviewArgs.email.length)
     $html += TEMPLATE_EMAIL.replace(/MARKER_EMAIL/g,
       getCellValuefromRow(
-        markerBoxPreviewArgs.sampleRow,
+        markerBoxPreviewArgs.rowData,
         markerBoxPreviewArgs.columnNames,
         markerBoxPreviewArgs.email
       )
@@ -169,7 +169,7 @@ var generateMarkerBoxPreviewContent = function (markerBoxPreviewArgs, options = 
   if (markerBoxPreviewArgs.phonenumber.length)
     $html += TEMPLATE_PHONENUMBER.replace(/MARKER_PHONENUMBER/g,
       getCellValuefromRow(
-        markerBoxPreviewArgs.sampleRow,
+        markerBoxPreviewArgs.rowData,
         markerBoxPreviewArgs.columnNames,
         markerBoxPreviewArgs.phonenumber
       )
@@ -203,7 +203,7 @@ var generateMarkerBoxPreviewContent = function (markerBoxPreviewArgs, options = 
             .replace(
               /MARKER_DESCRIPTION_VALUE/g,
               getCellValuefromRow(
-                markerBoxPreviewArgs.sampleRow,
+                markerBoxPreviewArgs.rowData,
                 markerBoxPreviewArgs.columnNames,
                 columnName
               )
@@ -216,7 +216,7 @@ var generateMarkerBoxPreviewContent = function (markerBoxPreviewArgs, options = 
         .replace(
           /MARKER_DESCRIPTION_VALUE/g,
           getCellValuefromRow(
-            markerBoxPreviewArgs.sampleRow,
+            markerBoxPreviewArgs.rowData,
             markerBoxPreviewArgs.columnNames,
             markerBoxPreviewArgs.description
           )

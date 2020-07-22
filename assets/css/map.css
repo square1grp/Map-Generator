@@ -68,3 +68,89 @@
 #legDiv .groupList li.inactive {
   opacity: 0.5;
 }
+
+.gm-style-iw-t::after {
+  display: none !important;
+}
+
+.gm-style-iw button[title="Close"] {
+  display: none !important;
+}
+
+.gm-style .gm-style-iw-c {
+  top: 120px;
+}
+
+#map-generator .map-marker-info {
+  position: relative;
+  padding-right: 30px;
+}
+
+#map-generator .map-marker-info a.close {
+  font-size: 20px;
+  cursor: pointer;
+  width: 12px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
+#map-generator .map-marker-info .content {
+  width: 200px;
+}
+
+#map-generator .map-marker-info .cardTitle {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  height: auto;
+  line-height: 17px;
+  white-space: normal;
+  padding-right: 25px;
+  margin-top: 2px;
+}
+
+#map-generator .map-marker-info .cardTitle a {
+  color: #36c;
+}
+
+#map-generator .map-marker-info .cardTitle a.marker:hover,
+#map-generator .map-marker-info .cardTitle a.marker:link,
+#map-generator .map-marker-info .cardTitle a.marker:visited {
+  border-bottom: 0;
+  margin: 0 0 2px 0;
+  text-decoration: none;
+  color: #36c;
+}
+
+#map-generator .map-marker-info .cardTitle a.marker:link,
+#map-generator .map-marker-info .cardTitle a.marker:visited {
+  display: block;
+  margin: 2px 0;
+  padding: 0;
+}
+
+#map-generator .map-marker-info .markerImage img.descIMG {
+  max-width: 198px;
+  border: 0;
+  margin: 10px;
+  width: 100%;
+}
+
+#map-generator .map-marker-info .markerDetails .address {
+  font-style: normal;
+  color: #000;
+}
+
+#map-generator .map-marker-info .markerDetails a {
+  color: #36c;
+}
+
+#map-generator .map-marker-info .l {
+  color: #545453;
+  font-weight: 700;
+}

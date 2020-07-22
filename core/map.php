@@ -16,7 +16,10 @@ function geocode() {
     $result = json_decode( $responseBody, true );
 
     if ( is_array( $result ) && !is_wp_error( $result ) )
-      array_push( $geocode_addresses, $result );
+      array_push( $geocode_addresses, [
+        'address' => $address,
+        'geo'     => $result
+      ] );
   }
 
   wp_send_json_success( $geocode_addresses );
