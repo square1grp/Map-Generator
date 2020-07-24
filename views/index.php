@@ -153,7 +153,7 @@ function map_generator_view() {
 								</label>
 
 								<label class="option-toggle" for="linkopwin_cb">
-									<input id="linkopwin_cb" type="checkbox"> Links open a new Window
+									<input id="linkopwin_cb" type="checkbox" checked> Links open a new Window
 								</label>
 				
 								<label class="option-toggle" for="disablethematic_cb" id="disablethematic">
@@ -274,6 +274,7 @@ function map_generator_view() {
 	</script>
 
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+	<script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=<?php _e( GOOGLE_API_KEY ) ?>"></script>
 	
 <?php

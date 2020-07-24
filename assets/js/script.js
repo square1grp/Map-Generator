@@ -210,8 +210,27 @@
     $(".map-generator #fields .map-options-col .markerLabel .markerContent > *").remove();
   };
 
+  // get distance
+  var getDistance = function (marker1, marker2) {
+    let unitType = $("#dist_sel").val() == "1" ? 'km' : 'mi'
+    let R = $("#dist_sel").val() == "1" ? 6371 : 3958.8; // Radius of the Earth
+    let rlat1 = marker1.lat * (Math.PI / 180); // Convert degrees to radians
+    let rlat2 = marker2.lat * (Math.PI / 180); // Convert degrees to radians
+    let difflat = rlat2 - rlat1; // Radian difference (latitudes)
+    let difflon = (marker2.lng - marker1.lng) * (Math.PI / 180); // Radian difference (longitudes)
+
+    let d = 2 * R * Math.asin(Math.sqrt(Math.sin(difflat / 2) * Math.sin(difflat / 2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.sin(difflon / 2) * Math.sin(difflon / 2)));
+
+    d = d.toFixed(2);
+
+    if (d > 0)
+      return `${d} ${unitType}`
+
+    return false
+  };
+
   // get marker box content
-  var getMarkerBoxContent = function (rowData) {
+  var getMarkerBoxContent = function (rowData, distance) {
     let markerBoxPreviewArgs = {
       ...markerBoxPreviewDefaultArgs,
       address: $("#address_sel").val(),
@@ -228,6 +247,10 @@
       phonenumber: $("#phonenumber_sel").val(),
       latitude: $("#lat_sel").val(),
       longitude: $("#lon_sel").val(),
+      showDistance: $("#dist_cb").prop("checked"),
+      distance: distance,
+      hideMapAddresses: $("#hideaddr_cb").prop("checked"),
+      newWindowLink: $("#linkopwin_cb").prop("checked"),
       columnNames: columnNames,
       rowData: rowData
     };
@@ -547,7 +570,6 @@
     let bound = null;
 
     geoList.forEach(function (geo) {
-      console.log(geo)
       if (bound == null) {
         bound = {
           min_lat: geo.geometry.location.lat,
@@ -604,6 +626,12 @@
     // labeltype
     let labelType = $("#labeltype_sel").val();
 
+    // clustering
+    let isClustering = $("#clustering_cb").prop("checked")
+
+    // hideAddress option
+    let hideMapAddresses = $("#hideaddr_cb").prop("checked")
+
     geoList.forEach(function (geo, geoIdx) {
       let groupName = groupList[geoIdx];
 
@@ -613,9 +641,11 @@
       else if (labelType == "numbers")
         labelText = geoIdx + 1;
 
+      let mapObj = !isClustering ? { map } : {}
+
       let marker = new google.maps.Marker({
         position: geo.geometry.location,
-        map: map,
+        ...mapObj,
         icon: {
           url: getMapMarkerIcon(groupColors[groupName], labelText),
           scaledSize: new google.maps.Size(30, 30)
@@ -636,17 +666,19 @@
         disableAutoPan: true,
         content: `
           <div class="map-marker-info hover-info">
-            <p style="margin: 0;"><b>${markerTitle}</b><br/>${markerAddress}</p>
+            <p style="margin: 0;"><b>${markerTitle}</b><br/>${!hideMapAddresses ? markerAddress : ''}</p>
           </div>
         `
       });
+
+      let distance = getDistance(geoList[0].geometry.location, geoList[geoIdx].geometry.location)
 
       marker.clickInfoWindow = new google.maps.InfoWindow({
         disableAutoPan: true,
         content: `
           <div class="map-marker-info click-info">
             <a class="close" onClick="closeMarkerInfoWindow(${geoIdx})">&times;</a>
-            <div class="content">${getMarkerBoxContent(markerRowData)}</div>
+            <div class="content">${getMarkerBoxContent(markerRowData, distance)}</div>
           </div>
         `
       });
@@ -670,6 +702,10 @@
 
       window.markers.push({ group: groupName, marker: marker });
     });
+
+    if (isClustering) {
+      new MarkerClusterer(map, window.markers.map(marker => marker.marker), { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' })
+    }
   };
 
   // get row title
@@ -778,7 +814,7 @@
   });
 
   $("#clustering_cb").change(function () {
-    $("#clusteroptions").toggle();
+    // $("#clusteroptions").toggle();
   });
 
   $(".map-generator #fields .map-options-col .option-images .option-image").click(function () {
@@ -812,9 +848,9 @@
       });
     });
 
-  $("#mapnow_button").trigger("click");
+  // $("#mapnow_button").trigger("click");
   // $("#validate_button").trigger("click");
-  $("#advanced_button").trigger("click");
+  // $("#advanced_button").trigger("click");
 
   var initMap = function (center) {
     let mapTypeId = $("#view_sel").val();

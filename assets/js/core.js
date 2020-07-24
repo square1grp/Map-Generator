@@ -84,6 +84,8 @@ var getCellValuefromRow = function (rowData, columnNames, columnName) {
     phonenumber: '',
     latitude: '',
     longitude: '',
+    hideMapAddresses: true/false,
+    newWindowLink: true/false,
     columnNames: [],
     rowData: [{}, {}, ...]
   }
@@ -91,8 +93,8 @@ var getCellValuefromRow = function (rowData, columnNames, columnName) {
 var generateMarkerBoxPreviewContent = function (markerBoxPreviewArgs, options = {}) {
   $html = ``;
 
-  if (markerBoxPreviewArgs.title?.length)
-    $html += TEMPLATE_TITLE
+  if (markerBoxPreviewArgs.title?.length) {
+    let titleTemplate = TEMPLATE_TITLE
       .replace(/MARKER_TITLE/g,
         getCellValuefromRow(
           markerBoxPreviewArgs.rowData,
@@ -108,16 +110,24 @@ var generateMarkerBoxPreviewContent = function (markerBoxPreviewArgs, options = 
         )
       )
 
+    if (!markerBoxPreviewArgs.newWindowLink)
+      titleTemplate = titleTemplate.replace(/ target="_blank"/g, '')
+
+    $html += titleTemplate
+  }
+
   $html += `
     <div class="markerSub">
       <div class="markerDetails">`;
 
   if (
-    markerBoxPreviewArgs.address.length ||
-    markerBoxPreviewArgs.city.length ||
-    markerBoxPreviewArgs.zip.length ||
-    markerBoxPreviewArgs.state.length ||
-    markerBoxPreviewArgs.country.length
+    !markerBoxPreviewArgs.hideMapAddresses && (
+      markerBoxPreviewArgs.address.length ||
+      markerBoxPreviewArgs.city.length ||
+      markerBoxPreviewArgs.zip.length ||
+      markerBoxPreviewArgs.state.length ||
+      markerBoxPreviewArgs.country.length
+    )
   ) {
     $html += TEMPLATE_LOCATION
       .replace(/MARKER_ADDRESS/g,
@@ -222,6 +232,12 @@ var generateMarkerBoxPreviewContent = function (markerBoxPreviewArgs, options = 
           )
         )
     }
+  }
+
+  if (markerBoxPreviewArgs.showDistance && markerBoxPreviewArgs.distance) {
+    $html += TEMPLATE_DESCRIPTION
+      .replace(/MARKER_DESCRIPTION_NAME/g, 'Distance')
+      .replace(/MARKER_DESCRIPTION_VALUE/g, markerBoxPreviewArgs.distance)
   }
 
   $html += `
