@@ -1,0 +1,137 @@
+#save_map_modal_wrapper {
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  display: none;
+}
+
+#save_map_modal_wrapper .overlay {
+  background-color: #dcdcdc;
+  opacity: 0.9;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#save_map_modal_wrapper .modal-content {
+  position: absolute;
+  background: #f7f7f7;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 36%;
+  left: 32%;
+  top: 100px;
+  padding: 30px;
+}
+
+#save_map_modal_wrapper .modal-content button.close {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  right: 7px;
+  top: 7px;
+  color: #979797;
+  z-index: 99999;
+  background-color: transparent;
+  font-size: 40px;
+  padding: 0;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+#save_map_modal_wrapper .modal-content button.close:hover {
+  text-decoration: none;
+  color: #ccc;
+}
+
+#save_map_modal_wrapper .modal-content .form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 8px;
+}
+
+#save_map_modal_wrapper .modal-content .form-row label {
+  text-align: right;
+  margin-right: 10px;
+  width: 114px;
+  padding: 2px 0 0 0;
+}
+
+#save_map_modal_wrapper .modal-content .form-row p {
+  width: 100%;
+  margin: 4px 0 0 124px;
+}
+
+#save_map_modal_wrapper .modal-content .form-row #map_description,
+#save_map_modal_wrapper .modal-content .form-row #map_email,
+#save_map_modal_wrapper .modal-content .form-row #map_title {
+  width: 350px;
+  border: 1px solid silver;
+  padding: 1px;
+  resize: none;
+}
+
+#save_map_modal_wrapper .modal-content .form-row .input_desc {
+  max-width: calc(100% - 124px);
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#save_map_modal_wrapper .modal-content .form-row .input_desc label {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  display: inline;
+  text-align: left;
+}
+
+#save_map_modal_wrapper .modal-content .form-row .input_desc label a {
+  color: inherit;
+}
+
+#save_map_modal_wrapper .modal-content .form-row .input_desc label a:link,
+#save_map_modal_wrapper .modal-content .form-row a:link {
+  color: #36c;
+  text-decoration: none;
+}
+
+#save_map_modal_wrapper .modal-content .form-row .input_desc p {
+  margin: 0;
+}
+
+#save_map_modal_wrapper .modal-content .form-row .ui-map-mode-toggle {
+  display: flex;
+  flex-grow: 1;
+  max-width: calc(100% - 124px);
+}
+
+#save_map_modal_wrapper .modal-content .form-row .ui-map-mode-toggle label.ui-map-mode-toggle-label {
+  width: auto;
+  text-align: left;
+}
+
+#save_map_modal_wrapper .modal-content .form-row .ui-map-mode-toggle div.ui-map-mode-toggle-header {
+  display: flex;
+  align-items: center;
+  height: 30px;
+}
+
+#save_map_modal_wrapper .modal-content .form-row .ui-map-mode-toggle p {
+  width: auto;
+  margin: 0;
+}
+
+#save_map_modal_wrapper .modal-content label[for="agree_terms"] {
+  font-size: 12px;
+}
+
+.map-generator input[type="submit"].save_map_button {
+  margin: 20px auto;
+}

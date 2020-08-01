@@ -1,0 +1,11 @@
+@import url("global.css");
+@import url("map.css");
+
+#map-generator #map {
+  height: 600px;
+}
+
+#map-generator .map-marker-info .markerDetails a,
+#map-generator .map-marker-info a.close {
+  text-decoration: none;
+}

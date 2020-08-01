@@ -30,9 +30,24 @@ function geocode_test() {
   wp_send_json_success( json_decode( $testJSON, true ) );
 }
 
+function save_map() {
+  $hash_key = md5(time());
+
+  if ( set_transient( $hash_key, $_POST ) ) {
+    wp_send_json_success( $hash_key );
+  } else {
+    wp_send_json_error();
+  }
+}
+
 add_action( 'rest_api_init', function () {
   register_rest_route( 'map-generator/v1', '/geocoding', array(
     'methods' => 'POST',
     'callback' => 'geocode_test',
+  ) );
+
+  register_rest_route( 'map-generator/v1', '/save-map', array(
+    'methods' => 'POST',
+    'callback' => 'save_map',
   ) );
 } );

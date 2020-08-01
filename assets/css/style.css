@@ -2,6 +2,7 @@
 @import url("fieldset.css");
 @import url("fields.css");
 @import url("map.css");
+@import url("modal.css");
 
 #map-generator {
   font-size: 14px;

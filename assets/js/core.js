@@ -675,3 +675,71 @@ var mapThemeOptions = {
     }]
   }]
 };
+
+// get center
+var getCenter = function (geoList) {
+  let bound = null;
+
+  geoList.forEach(function (geo) {
+    if (bound == null) {
+      bound = {
+        min_lat: geo.geometry.location.lat,
+        min_lng: geo.geometry.location.lng,
+        max_lat: geo.geometry.location.lat,
+        max_lng: geo.geometry.location.lng,
+      };
+    } else {
+      if (geo.geometry.location.lat < bound.min_lat) {
+        bound.min_lat = geo.geometry.location.lat;
+      }
+
+      if (geo.geometry.location.lng < bound.min_lng) {
+        bound.min_lng = geo.geometry.location.lng;
+      }
+
+      if (geo.geometry.location.lat > bound.max_lat) {
+        bound.max_lat = geo.geometry.location.lat;
+      }
+
+      if (geo.geometry.location.lng > bound.max_lng) {
+        bound.max_lng = geo.geometry.location.lng;
+      }
+    }
+  });
+
+  return {
+    lat: (bound.max_lat + bound.min_lat) / 2,
+    lng: (bound.max_lng + bound.min_lng) / 2,
+  };
+};
+
+// get distance
+var getDistance = function (dist_sel, marker1, marker2) {
+  let unitType = dist_sel == "1" ? 'km' : 'mi'
+  let R = dist_sel == "1" ? 6371 : 3958.8; // Radius of the Earth
+  let rlat1 = marker1.lat * (Math.PI / 180); // Convert degrees to radians
+  let rlat2 = marker2.lat * (Math.PI / 180); // Convert degrees to radians
+  let difflat = rlat2 - rlat1; // Radian difference (latitudes)
+  let difflon = (marker2.lng - marker1.lng) * (Math.PI / 180); // Radian difference (longitudes)
+
+  let d = 2 * R * Math.asin(Math.sqrt(Math.sin(difflat / 2) * Math.sin(difflat / 2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.sin(difflon / 2) * Math.sin(difflon / 2)));
+
+  d = d.toFixed(2);
+
+  if (d > 0)
+    return `${d} ${unitType}`
+
+  return false
+};
+
+// close marker infowindow
+window.closeMarkerInfoWindow = function (geoIdx) {
+  let marker = markers[geoIdx].marker;
+
+  marker.setIcon({
+    url: marker.icon.url,
+    scaledSize: new google.maps.Size(30, 30)
+  });
+
+  marker.clickInfoWindow.close();
+};

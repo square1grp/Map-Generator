@@ -99,6 +99,14 @@
   display: none;
 }
 
+.map-generator #save_map_wrapper {
+  display: none;
+  /* display: flex; */
+  margin-top: 20px;
+  text-align: center;
+}
+
+.map-generator input[type="submit"],
 .map-generator .fieldset .button-group input[type="submit"] {
   border: 1px solid #b7b7b7;
   border-radius: 3px;
@@ -127,6 +135,8 @@
   background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dcdcdc));
 }
 
+.map-generator #save_map,
+.map-generator input[type="submit"].save_map_button,
 .map-generator .fieldset .button-group #mapnow_button,
 .map-generator .fieldset .button-group #geocode_button {
   color: #fff;
@@ -137,6 +147,8 @@
   margin-right: auto;
 }
 
+.map-generator #save_map:hover,
+.map-generator input[type="submit"].save_map_button:hover,
 .map-generator .fieldset .button-group #mapnow_button:hover,
 .map-generator .fieldset .button-group #geocode_button:hover {
   background: #538018;

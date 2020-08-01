@@ -210,25 +210,6 @@
     $(".map-generator #fields .map-options-col .markerLabel .markerContent > *").remove();
   };
 
-  // get distance
-  var getDistance = function (marker1, marker2) {
-    let unitType = $("#dist_sel").val() == "1" ? 'km' : 'mi'
-    let R = $("#dist_sel").val() == "1" ? 6371 : 3958.8; // Radius of the Earth
-    let rlat1 = marker1.lat * (Math.PI / 180); // Convert degrees to radians
-    let rlat2 = marker2.lat * (Math.PI / 180); // Convert degrees to radians
-    let difflat = rlat2 - rlat1; // Radian difference (latitudes)
-    let difflon = (marker2.lng - marker1.lng) * (Math.PI / 180); // Radian difference (longitudes)
-
-    let d = 2 * R * Math.asin(Math.sqrt(Math.sin(difflat / 2) * Math.sin(difflat / 2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.sin(difflon / 2) * Math.sin(difflon / 2)));
-
-    d = d.toFixed(2);
-
-    if (d > 0)
-      return `${d} ${unitType}`
-
-    return false
-  };
-
   // get marker box content
   var getMarkerBoxContent = function (rowData, distance) {
     let markerBoxPreviewArgs = {
@@ -565,55 +546,6 @@
     }
   };
 
-  // get center
-  var getCenter = function (geoList) {
-    let bound = null;
-
-    geoList.forEach(function (geo) {
-      if (bound == null) {
-        bound = {
-          min_lat: geo.geometry.location.lat,
-          min_lng: geo.geometry.location.lng,
-          max_lat: geo.geometry.location.lat,
-          max_lng: geo.geometry.location.lng,
-        };
-      } else {
-        if (geo.geometry.location.lat < bound.min_lat) {
-          bound.min_lat = geo.geometry.location.lat;
-        }
-
-        if (geo.geometry.location.lng < bound.min_lng) {
-          bound.min_lng = geo.geometry.location.lng;
-        }
-
-        if (geo.geometry.location.lat > bound.max_lat) {
-          bound.max_lat = geo.geometry.location.lat;
-        }
-
-        if (geo.geometry.location.lng > bound.max_lng) {
-          bound.max_lng = geo.geometry.location.lng;
-        }
-      }
-    });
-
-    return {
-      lat: (bound.max_lat + bound.min_lat) / 2,
-      lng: (bound.max_lng + bound.min_lng) / 2,
-    };
-  };
-
-  // close marker infowindow
-  window.closeMarkerInfoWindow = function (geoIdx) {
-    let marker = markers[geoIdx].marker;
-
-    marker.setIcon({
-      url: marker.icon.url,
-      scaledSize: new google.maps.Size(30, 30)
-    });
-
-    marker.clickInfoWindow.close();
-  };
-
   // add markers
   var addMarkers = function () {
     let rowDataList = getRowDataList(sourceEle, false);
@@ -671,7 +603,7 @@
         `
       });
 
-      let distance = getDistance(geoList[0].geometry.location, geoList[geoIdx].geometry.location)
+      let distance = getDistance($("#dist_sel").val(), geoList[0].geometry.location, geoList[geoIdx].geometry.location)
 
       marker.clickInfoWindow = new google.maps.InfoWindow({
         disableAutoPan: true,
@@ -765,6 +697,7 @@
 
         $("#map").slideDown();
         $("#legWrap").slideDown();
+        $("#save_map_wrapper").slideDown();
       } else {
         console.log("geocoding error.");
       }
@@ -783,6 +716,7 @@
     isMapAvaialble = false;
     $("#map").hide();
     $("#legWrap").hide();
+    $("#save_map_wrapper").hide();
 
     $("#advanced_button").show().on("click", function () {
       $("#advancedOptions").slideDown();
@@ -848,10 +782,6 @@
       });
     });
 
-  // $("#mapnow_button").trigger("click");
-  // $("#validate_button").trigger("click");
-  // $("#advanced_button").trigger("click");
-
   var initMap = function (center) {
     let mapTypeId = $("#view_sel").val();
 
@@ -869,4 +799,81 @@
 
     isMapAvaialble = true;
   };
+
+  var saveMap = function () {
+    let payload = {
+      ...markerBoxPreviewDefaultArgs,
+      rowDataList: getRowDataList(sourceEle),
+      address: $("#address_sel").val(),
+      city: $("#city_sel").val(),
+      state: $("#state_sel").val(),
+      zip: $("#zip_sel").val(),
+      country: $("#country_sel").val(),
+      group: $("#group_sel").val(),
+      title: $("#title_sel").val(),
+      description: $("#desc_sel").val(),
+      url: $("#descURL_sel").val(),
+      imageURL: $("#descIMG_sel").val(),
+      email: $("#email_sel").val(),
+      phonenumber: $("#phonenumber_sel").val(),
+      latitude: $("#lat_sel").val(),
+      longitude: $("#lon_sel").val(),
+      showDistance: $("#dist_cb").prop("checked"),
+      hideMapAddresses: $("#hideaddr_cb").prop("checked"),
+      newWindowLink: $("#linkopwin_cb").prop("checked"),
+      labelType: $("#labeltype_sel").val(),
+      isClustering: $("#clustering_cb").prop("checked"),
+      pinType: $(".map-generator #fields .map-options-col.marker-shapes .option-images .option-image-selected").attr("pin-type"),
+      dist_sel: $("#dist_sel").val(),
+      mapType: $(".map-generator #fields .map-options-col.map-styles .option-images .option-image-selected").attr("map-type"),
+      mapTypeId: $("#view_sel").val(),
+      columnNames: columnNames,
+      geoAddressList: geoAddressList,
+      geoList: geoList,
+      groupColors: groupColors,
+    };
+
+    $.post("/wp-json/map-generator/v1/save-map", {
+      mapData: { ...payload },
+      pageData: {
+        title: $("#map_title").val(),
+        description: $("#map_description").val(),
+        email: $("#map_email").val(),
+        private: $("#save_map_modal_wrapper form input[name=private]:checked").val(),
+        mode: $("#save_map_modal_wrapper form input[name=map_mode]:checked").val()
+      }
+    }, function (response) {
+      if (response.success) {
+        alert(`Please check your email. Or visit /embedded-map/${response.data}`);
+      } else {
+        console.log("there is an error when save map")
+      }
+    })
+  }
+
+  $("#save_map_modal_wrapper form")
+    .off("submit")
+    .on("submit", function (e) {
+      e.preventDefault();
+
+      saveMap();
+    })
+
+  $("#save_map")
+    .off("click")
+    .on("click", function () {
+
+      $("#save_map_modal_wrapper").fadeIn();
+
+      $("#save_map_modal_wrapper button.close")
+        .off("click")
+        .on("click", function () {
+          $("#save_map_modal_wrapper").fadeOut();
+        });
+    });
+
+  $("#mapnow_button").trigger("click");
+  // $("#validate_button").trigger("click");
+  // $("#advanced_button").trigger("click");
+  // $("#save_map").trigger("click");
 })(jQuery)

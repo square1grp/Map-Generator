@@ -4,6 +4,8 @@ add_shortcode( 'map-generator', 'map_generator_view' );
 function map_generator_view() {
 	ob_start();
 
+	// print_r( get_transient( '1cabf8fc61ef4d3f669f67c1ec352d36' ) );
+
 	$sample_data = Spreadsheet::getSampleData();
 ?>
 
@@ -237,15 +239,114 @@ function map_generator_view() {
 				<ul class="groupList"></ul>
 			</div>
 		</div>
+
+		<div id="save_map_wrapper">
+			<input type="submit" id="save_map" value="Save Map" class="mx-auto save_map_button">
+		</div>
+
+		<div id="save_map_modal_wrapper">
+			<div class="overlay"></div>
+			<div class="modal-content">
+				<button type="button" class="close">&times;</button>
+				<form>
+					<div class="form-row">
+						<label for="map_title">Title</label>
+						<input id="map_title" size="50" maxlength="50">
+						<p><small>Enter a short title for your map, what is it?</small></p>
+					</div>
+
+					<div class="form-row">
+						<label for="map_description">Description</label>
+						<textarea id="map_description" cols="40" rows="5" spellcheck="false"></textarea>
+					</div>
+
+					<div class="form-row">
+						<label for="map_email">Email</label>
+						<input id="map_email" name="email" type="email" size="50" maxlength="50" placeholder="example@example.com" required>
+						<p><small>Enter this in case you want to EDIT your map later.</small></p>
+					</div>
+
+					<div class="form-row">
+						<label for="map_email">Privacy</label>
+						<div class="input_desc">
+							<label class="share" for="share_public">
+								<a title="Your map may be listed on the site under the featured maps section.">
+									<input id="share_public" type="radio" name="private" value="0">Public
+								</a>
+							</label>
+
+							<label class="share" for="share_unlisted">
+								<a title="Your map URL will be kept private.">
+									<input id="share_unlisted" type="radio" name="private" value="1" checked="checked">Unlisted
+								</a>
+							</label>
+
+							<label class="share" for="share_me" style="color:#999">
+								<a title="Your map URL will only be accessible from your account.">
+									<input id="share_me" type="radio" name="private" value="1" disabled="">Password Protect
+								</a> (<a href="/pricing/" target="_blank">Pro Only</a>)
+							</label>
+
+							<p><small>If you select "Unlisted" your map will be saved to a unique URL that will be kept private to you, it will not be listed anywhere on the site. You can read up on <a href="/features/security/" target="_blank">map privacy</a> in our <a href="/features/" target="_blank">features section</a>.</small></p>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<label for="map_email">Map Mode</label>
+						<div class="ui-map-mode-toggle">
+							<label class="ui-map-mode-toggle-label">
+								<div class="ui-map-mode-toggle-header">
+									<input type="radio" name="map_mode" value="data_view" checked="checked">
+									<p>Data View</p>
+								</div>
+								
+								<span class="ui-map-mode-toggle-image-wrap">
+									<img src="<?php _e( MAP_GENERATOR_PLUGIN_URL ) ?>/assets/images/data-view.svg">
+								</span>
+								
+								<p><small>Displays data below your map with filtering tools</small></p>
+							</label>
+							
+							<label class="ui-map-mode-toggle-label">
+								<div class="ui-map-mode-toggle-header">
+									<input type="radio" name="map_mode" value="store_locator">
+									<p>Store Locator</p>
+								</div
+								>
+								<span class="ui-map-mode-toggle-image-wrap">
+									<img src="<?php _e( MAP_GENERATOR_PLUGIN_URL ) ?>/assets/images/store-locator.svg">
+								</span>
+								<p><small>Displays locations in a list next to your map for easy scanning</small></p>
+							</label>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<label></label>
+						<div class="input_desc">
+							<span class="small">
+								<input type="checkbox" name="agree_terms" id="agree_terms" value="1" checked="">
+								<label for="agree_terms" class="share">I have read and agree to the BatchGeo <a href="/features/terms/" target="_blank">Terms of Service</a>.</label>
+							</span>
+						</div>
+					</div>
+
+					
+					<div class="form-row">
+						<input type="submit" value="Save Map" class="mx-auto save_map_button">
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
 
 	<script>
 		var MEMBERSHIP = 'lite'; //free, pro
 
-    var TEMPLATE_TITLE = `
+		var TEMPLATE_TITLE = `
 			<h1 class="cardTitle">
-        <a href="MARKER_URL" target="_blank" class="marker " rel="nofollow">MARKER_TITLE</a>
-      </h1>
+				<a href="MARKER_URL" target="_blank" class="marker " rel="nofollow">MARKER_TITLE</a>
+			</h1>
 		`;
 
 		var TEMPLATE_LOCATION = `
